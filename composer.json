@@ -8,8 +8,11 @@
     "support": {
         "email": "info@vyfakturuj.cz"
     },
+    "autoload": {
+        "classmap": ["libs/"]
+    },
     "require": {
         "php": ">=5.3.0",
-        "classmap": ["libs/"]
+        "ext-curl": "*"
     }
 }
