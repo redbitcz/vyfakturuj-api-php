@@ -1,0 +1,14 @@
+{
+    "name": "Vyfakturuj/Vyfakturuj-API-PHP",
+    "description": "Vyfakturuj API",
+    "keywords": ["vyfakturuj", "api", "faktura"],
+    "homepage": "https://www.vyfakturuj.cz/api/",
+    "type": "library",
+    "license": "MIT",
+    "support": {
+        "email": "info@vyfakturuj.cz"
+    },
+    "require": {
+        "php": ">=5.3.0"
+    }
+}

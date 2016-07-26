@@ -1,6 +1,7 @@
 <?php
 
-include(__DIR__.'/inc/inc.php');
+include(__DIR__.'/config.php');
+
 $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN,VYFAKTURUJ_API_KEY);
 
 #
