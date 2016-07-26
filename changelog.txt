@@ -1,0 +1,11 @@
+Verze 2.1.0
+-----------
++ Vytváření, úprava, čtení a mazání kontaktů
++ Vytváření, úprava, čtení a mazání šablon
++ Vytváření, úprava, čtení a mazání pravidelných faktur
++ Mazání faktur
+
+Verze 2.0.0
+-----------
++ Připojení na server
++ Vytváření, úprava a čtení faktur

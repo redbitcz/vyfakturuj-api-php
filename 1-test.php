@@ -1,0 +1,12 @@
+<?php
+
+include(__DIR__.'/inc/inc.php');
+$vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN,VYFAKTURUJ_API_KEY);
+
+$result = $vyfakturuj_api->test();
+
+echo '<h2>Test připojení k serveru:</h2>';
+echo '<pre>'.print_r($result,true).'</pre>';
+
+
+exit;
