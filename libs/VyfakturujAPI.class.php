@@ -63,6 +63,27 @@ class VyfakturujAPI{
     }
 
     /**
+     * Vrati šablonu e-mailu, který by se odeslal zákazníkovi.
+     *
+     * @param array $data Data, která chceme použít pro vytvoření šablony.
+     * @return array
+     */
+    public function invoice_sendMail_test($id,$data){
+        $data['test'] = true;
+        return $this->_post('/invoice/'.$id.'/send-mail/',$data);
+    }
+
+    /**
+     * Odešle e-mail podle zadaných dat
+     *
+     * @param array $data Data, která chceme použít pro vytvoření e-mailu
+     * @return array
+     */
+    public function invoice_sendMail($id,$data){
+        return $this->_post('/invoice/'.$id.'/send-mail/',$data);
+    }
+
+    /**
      * Smazání faktury
      *
      * @param int $id ID dokumentu

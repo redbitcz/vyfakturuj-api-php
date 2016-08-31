@@ -34,6 +34,11 @@ $opt = array(
             'text' => 'Kapalina do ostřikovačů 250 ml',
             'unit_price' => 59,
             'vat_rate' => 15,
+        ),
+        array(
+            'text' => 'Doprava',
+            'unit_price' => 0,
+            'vat_rate' => 0,
         )
     )
 );

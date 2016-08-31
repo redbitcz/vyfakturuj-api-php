@@ -7,3 +7,23 @@ Příhlady API napojení na aplikaci Vyfakturuj.cz v programovacím jazyce PHP
 3. V souboru /examples/2-invoice.php se nachází ukázka, jak vytvářet, updatovat, získávat a mazat faktury
 4. V souboru /examples/3-contact.php se nachází ukázka, jak vytvářet, updatovat, získávat a mazat kontakty
 5. V souboru /examples/4-template.php se nachází ukázka, jak vytvářet, updatovat, získávat a mazat pravidelné faktury a šablony
+6. V souboru /examples/5-invoice-sendMail.php se nachází ukázka, jak odeslat e-mail s fakturou
+
+
+## Changelog
+
+### Verze 2.1.1
+
++ Možnost odeslat fakturu e-mailem přes API
+
+### Verze 2.1.0
+
++ Vytváření, úprava, čtení a mazání kontaktů
++ Vytváření, úprava, čtení a mazání šablon
++ Vytváření, úprava, čtení a mazání pravidelných faktur
++ Mazání faktur
+
+### Verze 2.0.0
+
++ Připojení na server
++ Vytváření, úprava a čtení faktur
