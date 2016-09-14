@@ -4,23 +4,24 @@
  * Třída pro práci s API Vyfakturuj.cz
  *
  * @author Ing. Martin Dostál <info@vyfakturuj.cz>
- * @version 2.1.0
+ * @version 2.1.2
  */
 class VyfakturujAPI{
 
     protected $login = null;
     protected $apiHash = null;
     protected static $URL = 'https://www.vyfakturuj.cz/api/2.0/';
-
-    public function __construct($login,$apiHash){
-        $this->login = $login;
-        $this->apiHash = $apiHash;
-    }
+    protected $lastInfo = null;
 
     const METHOD_POST = 'post',
             METHOD_GET = 'get',
             METHOD_DELETE = 'delete',
             METHOD_PUT = 'put';
+
+    public function __construct($login,$apiHash){
+        $this->login = $login;
+        $this->apiHash = $apiHash;
+    }
 
     /**
      * Vytvoření nového dokumentu
@@ -29,7 +30,7 @@ class VyfakturujAPI{
      * @return array Vrátí kompletní informace o dokumentu
      */
     public function createInvoice($data){
-        return $this->_post('/invoice/',$data);
+        return $this->_post('invoice/',$data);
     }
 
     /**
@@ -40,7 +41,7 @@ class VyfakturujAPI{
      * @return array Vrátí kompletní informace o dokumentu
      */
     public function updateInvoice($id,$data){
-        return $this->_put('/invoice/'.$id.'/',$data);
+        return $this->_put('invoice/'.$id.'/',$data);
     }
 
     /**
@@ -50,7 +51,7 @@ class VyfakturujAPI{
      * @return array Vrátí kompletní informace o dokumentu
      */
     public function getInvoice($id){
-        return $this->_get('/invoice/'.$id.'/');
+        return $this->_get('invoice/'.$id.'/');
     }
 
     /**
@@ -59,7 +60,7 @@ class VyfakturujAPI{
      * @return array
      */
     public function getInvoices(){
-        return $this->_get('/invoice/');
+        return $this->_get('invoice/');
     }
 
     /**
@@ -70,7 +71,7 @@ class VyfakturujAPI{
      */
     public function invoice_sendMail_test($id,$data){
         $data['test'] = true;
-        return $this->_post('/invoice/'.$id.'/send-mail/',$data);
+        return $this->_post('invoice/'.$id.'/send-mail/',$data);
     }
 
     /**
@@ -80,7 +81,23 @@ class VyfakturujAPI{
      * @return array
      */
     public function invoice_sendMail($id,$data){
-        return $this->_post('/invoice/'.$id.'/send-mail/',$data);
+        return $this->_post('invoice/'.$id.'/send-mail/',$data);
+    }
+
+    /**
+     * Uhradí fakturu
+     *
+     * @param int $id id dokumentu
+     * @param date $date Např: 2016-12-31, pokud je nastaveno na 0000-00-00 pak se zruší uhrada dokladu
+     * @param int|float $amount Kolik bylo uhrazeno. Pokud je NULL, bude faktura uhrazena nezávisle na částce
+     * @return array Detail dokladu po uhrazeni
+     */
+    public function invoice_setPayment($id,$date,$amount = null){
+        $data = array('date' => $date);
+        if(!is_null($amount)){
+            $data['amount'] = $amount;
+        }
+        return $this->_post('invoice/'.$id.'/payment/',$data);
     }
 
     /**
@@ -90,7 +107,7 @@ class VyfakturujAPI{
      * @return array Vrátí stav operace
      */
     public function deleteInvoice($id){
-        return $this->_delete('/invoice/'.$id.'/');
+        return $this->_delete('invoice/'.$id.'/');
     }
 
     /**
@@ -100,7 +117,7 @@ class VyfakturujAPI{
      * @return array Vrátí kompletní informace o kontaktu
      */
     public function createContact($data){
-        return $this->_post('/contact/',$data);
+        return $this->_post('contact/',$data);
     }
 
     /**
@@ -111,7 +128,7 @@ class VyfakturujAPI{
      * @return array Vrátí kompletní informace o kontaktu
      */
     public function updateContact($id,$data){
-        return $this->_put('/contact/'.$id.'/',$data);
+        return $this->_put('contact/'.$id.'/',$data);
     }
 
     /**
@@ -121,7 +138,7 @@ class VyfakturujAPI{
      * @return array Vrátí kompletní informace o kontaktu
      */
     public function getContact($id){
-        return $this->_get('/contact/'.$id.'/');
+        return $this->_get('contact/'.$id.'/');
     }
 
     /**
@@ -130,7 +147,7 @@ class VyfakturujAPI{
      * @return array
      */
     public function getContacts(){
-        return $this->_get('/contact/');
+        return $this->_get('contact/');
     }
 
     /**
@@ -140,7 +157,7 @@ class VyfakturujAPI{
      * @return array Vrátí stav operace
      */
     public function deleteContact($id){
-        return $this->_delete('/contact/'.$id.'/');
+        return $this->_delete('contact/'.$id.'/');
     }
 
     /**
@@ -150,7 +167,7 @@ class VyfakturujAPI{
      * @return array Vrátí kompletní informace o položce
      */
     public function createTemplate($data){
-        return $this->_post('/template/',$data);
+        return $this->_post('template/',$data);
     }
 
     /**
@@ -161,7 +178,7 @@ class VyfakturujAPI{
      * @return array Vrátí kompletní informace o položce
      */
     public function updateTemplate($id,$data){
-        return $this->_put('/template/'.$id.'/',$data);
+        return $this->_put('template/'.$id.'/',$data);
     }
 
     /**
@@ -171,7 +188,7 @@ class VyfakturujAPI{
      * @return array Vrátí kompletní informace
      */
     public function getTemplate($id){
-        return $this->_get('/template/'.$id.'/');
+        return $this->_get('template/'.$id.'/');
     }
 
     /**
@@ -180,7 +197,7 @@ class VyfakturujAPI{
      * @return array
      */
     public function getTemplates(){
-        return $this->_get('/template/');
+        return $this->_get('template/');
     }
 
     /**
@@ -190,7 +207,7 @@ class VyfakturujAPI{
      * @return array Vrátí stav operace
      */
     public function deleteTemplate($id){
-        return $this->_delete('/template/'.$id.'/');
+        return $this->_delete('template/'.$id.'/');
     }
 
     /**
@@ -199,7 +216,7 @@ class VyfakturujAPI{
      * @return array
      */
     public function test(){
-        return $this->_get('/test/');
+        return $this->_get('test/');
     }
 
     private function _connect($path,$method,$data = array()){
@@ -228,11 +245,19 @@ class VyfakturujAPI{
         }
 
         $response = curl_exec($curl);
-//        $info = curl_getinfo($curl);
+        $this->lastInfo = curl_getinfo($curl);
         curl_close($curl);
 
         $return = json_decode($response,true);
         return $return ? $return : $response;
+    }
+
+    /**
+     * Vrati informace o poslednim spojeni
+     * @return array|null
+     */
+    public function getInfo(){
+        return $this->lastInfo;
     }
 
     private function _get($path,$data = null){
