@@ -4,7 +4,7 @@
  * Třída pro práci s API Vyfakturuj.cz
  *
  * @author Ing. Martin Dostál <info@vyfakturuj.cz>
- * @version 2.1.2
+ * @version 2.1.3
  */
 class VyfakturujAPI{
 
@@ -219,6 +219,32 @@ class VyfakturujAPI{
         return $this->_get('test/');
     }
 
+    /**
+     * Test faktury v PDF.
+     * Pošle data na server, vytvoří na serveru fakturu kterou ale neuloží a pošle zpět ve formátu PDF.
+     * Pokud se podaří fakturu vytvořit, pak je poslána ve formátu PDF na výstup. Jinak je vráceno pole.
+     *
+     * @param array $data
+     * @return array
+     */
+    public function test_invoice__asPdf($data){
+        $result = $this->_post('test/invoice/download/',$data);
+        if(array_key_exists('content',$result)){
+            ob_end_clean();
+            $content = base64_decode($result['content']);
+            header("Cache-Control: public");
+            $filename = $result['filename'];
+            header("Content-Description: File Transfer");
+            header("Content-Disposition: attachment; filename=\"".$filename.".pdf\"");
+            header('Content-type: application/pdf');
+            header("Content-Transfer-Encoding: binary");
+            header("Content-Length: ".strlen($content));
+            echo $content;
+            exit;
+        }
+        return $result;
+    }
+
     private function _connect($path,$method,$data = array()){
         $curl = curl_init();
         curl_setopt($curl,CURLOPT_URL,static::$URL.$path);
@@ -246,6 +272,7 @@ class VyfakturujAPI{
 
         $response = curl_exec($curl);
         $this->lastInfo = curl_getinfo($curl);
+        $this->lastInfo['dataSend'] = $data;
         curl_close($curl);
 
         $return = json_decode($response,true);
