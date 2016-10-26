@@ -17,6 +17,12 @@ Podrobnou dokumentace k API najdete na [http://docs.vyfakturujcz.apiary.io/](htt
 
 ## Changelog
 
+### Verze 2.1.4
+
++ Možnost filtrace v seznamu faktur getInvoices(array('id_customer' => 123))
++ Možnost filtrace v seznamu kontaktů getContacts(array('mail_to' => 'info@vyfakturuj.cz'))
++ Možnost filtrace v seznamu šablon a pravidelných faktur getTemplates(array('type' => 2,'end_type' => 1))
+
 ### Verze 2.1.3
 
 + Přidání podpůrné funkce test_invoice__asPdf() - vytvoření faktury a stažení v PDF bez uložení v systému

@@ -4,7 +4,7 @@
  * Třída pro práci s API Vyfakturuj.cz
  *
  * @author Ing. Martin Dostál <info@vyfakturuj.cz>
- * @version 2.1.3
+ * @version 2.1.4
  */
 class VyfakturujAPI{
 
@@ -59,8 +59,8 @@ class VyfakturujAPI{
      *
      * @return array
      */
-    public function getInvoices(){
-        return $this->_get('invoice/');
+    public function getInvoices($args = array()){
+        return $this->_get('invoice/?'.http_build_query($args));
     }
 
     /**
@@ -142,12 +142,13 @@ class VyfakturujAPI{
     }
 
     /**
-     * Vrátí seznam všech kontaktů
+     * Vrátí seznam kontaktů
      *
+     * @param array $args
      * @return array
      */
-    public function getContacts(){
-        return $this->_get('contact/');
+    public function getContacts($args = array()){
+        return $this->_get('contact/?'.http_build_query($args));
     }
 
     /**
@@ -196,8 +197,8 @@ class VyfakturujAPI{
      *
      * @return array
      */
-    public function getTemplates(){
-        return $this->_get('template/');
+    public function getTemplates($args = array()){
+        return $this->_get('template/?'.http_build_query($args));
     }
 
     /**

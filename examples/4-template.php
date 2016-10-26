@@ -106,6 +106,8 @@ echo '<pre>'.print_r($ret2,true).'</pre>';
 
 
 $ret3 = $vyfakturuj_api->getTemplate($_ID_ITEM);
+// $ret3 = $vyfakturuj_api->getTemplates(); // vrati vsechny sablony a pravidelné faktury
+// $ret3 = $vyfakturuj_api->getTemplates(array('type' => 2,'end_type' => 1)); // vrati vsechny pravidelné faktury, které nemají nastaveno datum ukončení
 
 echo '<h2>Načetli jsme data o pravidelné faktuře faktuře ze systému:</h2>';
 echo '<pre>'.print_r($ret3,true).'</pre>';
