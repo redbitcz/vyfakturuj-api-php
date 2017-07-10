@@ -4,13 +4,13 @@
  * Třída pro práci s API Vyfakturuj.cz
  *
  * @author Ing. Martin Dostál <info@vyfakturuj.cz>
- * @version 2.1.4
+ * @version 2.1.6
  */
 class VyfakturujAPI{
 
     protected $login = null;
     protected $apiHash = null;
-    protected static $URL = 'https://www.vyfakturuj.cz/api/2.0/';
+    protected static $URL = 'https://api.vyfakturuj.cz/2.0/';
     protected $lastInfo = null;
 
     const METHOD_POST = 'post',
@@ -85,15 +85,25 @@ class VyfakturujAPI{
     }
 
     /**
+     * Odesle dokument do EET
+     *
+     * @param int $id
+     * @return array
+     */
+    public function invoice_sendEet($id){
+        return $this->_post('invoice/'.$id.'/send-eet/');
+    }
+
+    /**
      * Uhradí fakturu
      *
      * @param int $id id dokumentu
-     * @param date $date Např: 2016-12-31, pokud je nastaveno na 0000-00-00 pak se zruší uhrada dokladu
+     * @param date|null $date Např: 2016-12-31, pokud je nastaveno na 0000-00-00 pak se zruší uhrada dokladu
      * @param int|float $amount Kolik bylo uhrazeno. Pokud je NULL, bude faktura uhrazena nezávisle na částce
      * @return array Detail dokladu po uhrazeni
      */
-    public function invoice_setPayment($id,$date,$amount = null){
-        $data = array('date' => $date);
+    public function invoice_setPayment($id,$date = null,$amount = null){
+        $data = array('date' => is_null($date) ? date("Y-m-d") : $date);
         if(!is_null($amount)){
             $data['amount'] = $amount;
         }
@@ -212,6 +222,33 @@ class VyfakturujAPI{
     }
 
     /**
+     * Vrátí seznam všech produktu
+     *
+     * @return array
+     */
+    public function getProducts($args = array()){
+        return $this->_get('product/?'.http_build_query($args));
+    }
+
+    /**
+     * Vrati seznam platebních metod
+     *
+     * @return array
+     */
+    public function getSettings_paymentMethods(){
+        return $this->_get('settings/payment-method/');
+    }
+
+    /**
+     * Vrati seznam číselných řad
+     *
+     * @return array
+     */
+    public function getSettings_numberSeries(){
+        return $this->_get('settings/number-series/');
+    }
+
+    /**
      * Testovací funkce pro ověření správného spojení se serverem
      *
      * @return array
@@ -275,9 +312,8 @@ class VyfakturujAPI{
         $this->lastInfo = curl_getinfo($curl);
         $this->lastInfo['dataSend'] = $data;
         curl_close($curl);
-
         $return = json_decode($response,true);
-        return $return ? $return : $response;
+        return is_array($return) ? $return : $response;
     }
 
     /**

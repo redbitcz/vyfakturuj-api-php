@@ -17,6 +17,9 @@ $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN,VYFAKTURUJ_API_KEY);
 #
 
 $opt = array(
+    'type' => 1,
+    'calculate_vat' => 2,
+    'payment_method' => 2,
     'customer_IC' => '123456789',
     'customer_DIC' => 'CZ123456789',
     'customer_name' => 'Ukázková Firma',
@@ -24,6 +27,7 @@ $opt = array(
     'customer_city' => 'Praha',
     'customer_zip' => '10300',
     'customer_country' => 'Česká republika',
+    'currency' => 'EUR',
     'items' => array(
         array(
             'text' => 'Stěrač na ponorku',
@@ -40,15 +44,27 @@ $opt = array(
             'unit_price' => 0,
             'vat_rate' => 0,
         )
-    )
+    ),
+    'action_after_create_send_to_eet' => true
 );
 
 $inv = $vyfakturuj_api->createInvoice($opt);    // vytvoříme novou fakturu
-
+//$inv = $vyfakturuj_api->invoice_setPayment($inv['id']);    // vytvoříme novou fakturu
 echo '<h2>Vytvořili jsme fakturu:</h2>';
 echo '<pre>'.print_r($inv,true).'</pre>';
-
 $_ID_DOKUMENTU = $inv['id'];    // uložíme si ID nového dokumentu
+die;
+$opt = array(
+    'type' => 32,
+    'id_parent' => $_ID_DOKUMENTU,
+    'action_after_create_send_to_eet' => true
+);
+
+$inv = $vyfakturuj_api->createInvoice($opt);    // vytvoříme novou fakturu
+echo '<h2>Vytvořili jsme ODD:</h2>';
+echo '<pre>'.print_r($inv,true).'</pre>';
+$_ID_DOKUMENTU = $inv['id'];    // uložíme si ID nového dokumentu
+die;
 #
 #
 ####################################################################################

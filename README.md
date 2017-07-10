@@ -13,15 +13,34 @@ Podrobnou dokumentace k API najdete na [http://docs.vyfakturujcz.apiary.io/](htt
 6. V souboru /examples/5-invoice-sendMail.php se nachází ukázka, jak odeslat e-mail s fakturou
 7. V souboru /examples/6-invoice-setPayment.php se nachází ukázka, jak provést uhrazení faktury
 8. V souboru /examples/7-test-invoice-download.php se nachází ukázka, jak pracovat s funkci test_invoice__asPdf(). Tato funkce vrátí PDF aniž by uložila dokument (fakturu) do systému. Hodí se zejména pokud potřebujeme odladit vzhled faktury
+9. V souboru /examples/8-invoice-sendEET.php se nachází ukázka, jak poslat požadavek na zaúčtování dokladu v EET
+10. V souboru /examples/9-invoice_search.php se nachází ukázka, jak vyhledávat v seznamu faktur
+11. V souboru /examples/a-product.php se nachází ukázka, jak vyhledávat v Seznamu produktů (SimpleShop.cz)
+12. V souboru /examples/b-payment-method.php se nachází ukázka, jak získat seznam platebních metod (způsobů uhrady)
+32. V souboru /examples/c-number-series.php se nachází ukázka, jak získat seznam číslených řad
 
 
 ## Changelog
 
+### Verze 2.1.6
+
++ Čtení nastavení platebních metod (způsobů úhrady) přes getSettings_paymentMethods()
++ Čtení nastavení číslených řad přes getSettings_numberSeries()
++ Podpora pro SimpleShop - čtení prodůktů přes getProducts($args)
+
+
+### Verze 2.1.5
+
++ Podpora EET
++ Manuální odeslání do EET přes invoice_sendEet($id)
++ Pro API byla vyčleněna nová URL https://api.vyfakturuj.cz/2.0/ (původní je stále funkční)
++ Ve fci invoice_setPayment($id,$date = null,$amount = null) je nově $date jako volitelný parametr
+
 ### Verze 2.1.4
 
-+ Možnost filtrace v seznamu faktur getInvoices(array('id_customer' => 123))
-+ Možnost filtrace v seznamu kontaktů getContacts(array('mail_to' => 'info@vyfakturuj.cz'))
-+ Možnost filtrace v seznamu šablon a pravidelných faktur getTemplates(array('type' => 2,'end_type' => 1))
++ Možnost filtrace v seznamu faktur přes getInvoices(array('id_customer' => 123))
++ Možnost filtrace v seznamu kontaktů přes getContacts(array('mail_to' => 'info@vyfakturuj.cz'))
++ Možnost filtrace v seznamu šablon a pravidelných faktur přes getTemplates(array('type' => 2,'end_type' => 1))
 
 ### Verze 2.1.3
 
