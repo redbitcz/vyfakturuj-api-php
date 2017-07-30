@@ -290,7 +290,7 @@ class VyfakturujAPI{
         curl_setopt($curl,CURLOPT_FAILONERROR,FALSE);
         curl_setopt($curl,CURLOPT_HTTPAUTH,CURLAUTH_BASIC);
         curl_setopt($curl,CURLOPT_USERPWD,$this->login.':'.$this->apiHash);
-        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,false);
+        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,TRUE);
         curl_setopt($curl,CURLOPT_SSL_VERIFYHOST,2);
         curl_setopt($curl,CURLOPT_HTTPHEADER,array('Content-Type: application/json'));
 
