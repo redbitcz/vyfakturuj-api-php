@@ -6,6 +6,8 @@
  * @author Ing. Martin Dostál <info@vyfakturuj.cz>
  * @version 2.1.6
  */
+if (!class_exists(VyfakturujAPI)){
+  
 class VyfakturujAPI{
 
     protected $login = null;
@@ -339,5 +341,7 @@ class VyfakturujAPI{
     private function _delete($path,$data = null){
         return $this->_connect($path,self::METHOD_DELETE,$data);
     }
+
+}
 
 }
