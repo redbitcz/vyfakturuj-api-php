@@ -1,8 +1,8 @@
 <?php
 
-include(__DIR__ . '/00-config.php');
+include __DIR__ . '/00-config.php';
 
-$vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN,VYFAKTURUJ_API_KEY);
+$vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 
 #
 #
@@ -18,7 +18,8 @@ $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN,VYFAKTURUJ_API_KEY);
 // Vytvoříme nový kontakt
 $opt_contact = array(
     'IC' => '123456789',
-    'name' => '#API - Ukázkový kontakt pro pravidelnou fakturu',// "#API - " dáváme na začátek, chceme mít tento kontakt na začátku našeho adresáře
+    'name' => '#API - Ukázkový kontakt pro pravidelnou fakturu',
+    // "#API - " dáváme na začátek, chceme mít tento kontakt na začátku našeho adresáře
     'note' => 'Kontakt vytvořený přes API',
     'company' => 'Ukázkový kontakt',
     'street' => 'Pouliční 79/C',
@@ -55,7 +56,7 @@ $opt_template = array(
 $ret = $vyfakturuj_api->createTemplate($opt_template);    // vytvoříme novou fakturu
 
 echo '<h2>Vytvořili jsme pravidelnou fakturu:</h2>';
-echo '<pre>'.print_r($ret,true).'</pre>';
+echo '<pre>' . print_r($ret, true) . '</pre>';
 
 $_ID_ITEM = $ret['id'];    // uložíme si ID nového zaznamu
 #
@@ -86,10 +87,10 @@ $opt_template = array(
     )
 );
 
-$ret2 = $vyfakturuj_api->updateTemplate($_ID_ITEM,$opt_template);    // upravíme zaznam
+$ret2 = $vyfakturuj_api->updateTemplate($_ID_ITEM, $opt_template);    // upravíme zaznam
 
 echo '<h2>Upravili jsme pravidelnou fakturu:</h2>';
-echo '<pre>'.print_r($ret2,true).'</pre>';
+echo '<pre>' . print_r($ret2, true) . '</pre>';
 
 
 #
@@ -110,7 +111,7 @@ $ret3 = $vyfakturuj_api->getTemplate($_ID_ITEM);
 // $ret3 = $vyfakturuj_api->getTemplates(array('type' => 2,'end_type' => 1)); // vrati vsechny pravidelné faktury, které nemají nastaveno datum ukončení
 
 echo '<h2>Načetli jsme data o pravidelné faktuře faktuře ze systému:</h2>';
-echo '<pre>'.print_r($ret3,true).'</pre>';
+echo '<pre>' . print_r($ret3, true) . '</pre>';
 
 
 #
@@ -130,6 +131,6 @@ $ret4 = $vyfakturuj_api->deleteTemplate($_ID_ITEM);
 $ret5 = $vyfakturuj_api->deleteContact($_ID_CONTACT);
 
 echo '<h2>Načetli jsme data o průběhu smazání faktury ze systému:</h2>';
-echo '<pre>'.print_r($ret4,true).'</pre>';
-echo '<pre>'.print_r($ret5,true).'</pre>';
+echo '<pre>' . print_r($ret4, true) . '</pre>';
+echo '<pre>' . print_r($ret5, true) . '</pre>';
 exit;

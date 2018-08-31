@@ -1,8 +1,8 @@
 <?php
 
-include(__DIR__ . '/00-config.php');
+include __DIR__ . '/00-config.php';
 
-$vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN,VYFAKTURUJ_API_KEY);
+$vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 
 #
 #
@@ -51,7 +51,7 @@ $opt = array(
 $inv = $vyfakturuj_api->createInvoice($opt);    // vytvoříme novou fakturu
 //$inv = $vyfakturuj_api->invoice_setPayment($inv['id']);    // vytvoříme novou fakturu
 echo '<h2>Vytvořili jsme fakturu:</h2>';
-echo '<pre>'.print_r($inv,true).'</pre>';
+echo '<pre>' . print_r($inv, true) . '</pre>';
 $_ID_DOKUMENTU = $inv['id'];    // uložíme si ID nového dokumentu
 die;
 $opt = array(
@@ -62,7 +62,7 @@ $opt = array(
 
 $inv = $vyfakturuj_api->createInvoice($opt);    // vytvoříme novou fakturu
 echo '<h2>Vytvořili jsme ODD:</h2>';
-echo '<pre>'.print_r($inv,true).'</pre>';
+echo '<pre>' . print_r($inv, true) . '</pre>';
 $_ID_DOKUMENTU = $inv['id'];    // uložíme si ID nového dokumentu
 die;
 #
@@ -88,10 +88,10 @@ $opt = array(
     )
 );
 
-$inv2 = $vyfakturuj_api->updateInvoice($_ID_DOKUMENTU,$opt);    // upravíme fakturu
+$inv2 = $vyfakturuj_api->updateInvoice($_ID_DOKUMENTU, $opt);    // upravíme fakturu
 
 echo '<h2>Upravili jsme fakturu:</h2>';
-echo '<pre>'.print_r($inv2,true).'</pre>';
+echo '<pre>' . print_r($inv2, true) . '</pre>';
 
 
 #
@@ -110,7 +110,7 @@ echo '<pre>'.print_r($inv2,true).'</pre>';
 $inv3 = $vyfakturuj_api->getInvoice($_ID_DOKUMENTU);
 
 echo '<h2>Načetli jsme data o faktuře ze systému:</h2>';
-echo '<pre>'.print_r($inv3,true).'</pre>';
+echo '<pre>' . print_r($inv3, true) . '</pre>';
 
 
 #
@@ -130,5 +130,5 @@ exit;   // zablokování smazání
 $inv4 = $vyfakturuj_api->deleteInvoice($_ID_DOKUMENTU);
 
 echo '<h2>Načetli jsme data o průběhu smazání faktury ze systému:</h2>';
-echo '<pre>'.print_r($inv4,true).'</pre>';
+echo '<pre>' . print_r($inv4, true) . '</pre>';
 exit;
