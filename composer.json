@@ -5,6 +5,12 @@
     "homepage": "https://www.vyfakturuj.cz/api/",
     "type": "library",
     "license": "MIT",
+    "authors": [
+        {
+           "name": "Redbit s.r.o.",
+            "homepage": "https://www.redbit.cz/"
+        }
+    ],
     "support": {
         "email": "info@vyfakturuj.cz"
     },

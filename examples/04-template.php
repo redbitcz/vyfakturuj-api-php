@@ -32,6 +32,12 @@ $contact = $vyfakturuj_api->createContact($opt_contact);    // vytvoříme nový
 
 $_ID_CONTACT = $contact['id'];
 
+/*
+ * Některá čísla v příkladu níže jsou číselná označení systémových typů.
+ * Například: 'type' => 2 znamená, že vytváříme Pravidelnou fakturu, nikoliv jen Šablonu.
+ * Popis všech hodnot najdete v dokumentaci: https://vyfakturujcz.docs.apiary.io/#reference/faktury
+ * Zkušenější uživatelé mohou použít výčet možných hodnot v přiložené třídě VyfakturujEnum.
+ */
 $opt_template = array(
     'id_customer' => $_ID_CONTACT,// vložíme právě vytvořený kontakt
 //    'id_customer' => 20224,// vložíme právě vytvořený kontakt

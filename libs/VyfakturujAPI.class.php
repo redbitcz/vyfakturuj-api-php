@@ -1,12 +1,16 @@
 <?php
+/**
+ * @package Redbit\Vyfakturuj\VyfakturujAPI
+ * @license MIT
+ * @coypright 2016-2018 Redbit s.r.o.
+ * @author Redbit s.r.o. <info@vyfakturuj.cz>
+ * @author Ing. Martin Dostál
+ */
 
 
 
 /**
  * Třída pro práci s API Vyfakturuj.cz
- *
- * @author Ing. Martin Dostál <info@vyfakturuj.cz>
- * @version 2.1.6
  */
 class VyfakturujAPI
 {
