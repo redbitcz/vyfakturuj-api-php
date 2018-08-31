@@ -16,6 +16,13 @@ $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 #
 #
 
+
+/*
+ * Některá čísla v příkladu níže jsou číselná označení systémových typů.
+ * Například: 'type' => 1 znamená, že vytvořený doklad bude Faktura a nikoliv třeba Výzva k platbě.
+ * Popis všech hodnot najdete v dokumentaci: https://vyfakturujcz.docs.apiary.io/#reference/faktury
+ * Zkušenější uživatelé mohou použít výčet možných hodnot v přiložené třídě VyfakturujEnum.
+ */
 $opt = array(
     'type' => 1,
     'calculate_vat' => 2,
