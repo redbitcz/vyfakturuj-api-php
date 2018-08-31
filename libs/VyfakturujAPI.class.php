@@ -10,17 +10,23 @@
  */
 class VyfakturujAPI
 {
+    // HTTP methods
+    const HTTP_METHOD_POST = 'POST';
+    const HTTP_METHOD_GET = 'GET';
+    const HTTP_METHOD_DELETE = 'DELETE';
+    const HTTP_METHOD_PUT = 'PUT';
 
-    protected $login = null;
-    protected $apiHash = null;
-    protected static $URL = 'https://api.vyfakturuj.cz/2.0/';
-    protected $lastInfo = null;
+    /** @var string */
+    protected $endpointUrl = 'https://api.vyfakturuj.cz/2.0/';
 
-    const METHOD_POST = 'post',
-        METHOD_GET = 'get',
-        METHOD_DELETE = 'delete',
-        METHOD_PUT = 'put';
+    /** @var string */
+    protected $login;
 
+    /** @var string */
+    protected $apiHash;
+
+    /** @var null|array */
+    protected $lastInfo;
 
     /**
      * @param string $login
@@ -41,7 +47,7 @@ class VyfakturujAPI
      */
     public function createInvoice($data)
     {
-        return $this->_post('invoice/', $data);
+        return $this->fetchPost('invoice/', $data);
     }
 
 
@@ -54,7 +60,7 @@ class VyfakturujAPI
      */
     public function updateInvoice($id, $data)
     {
-        return $this->_put('invoice/' . $id . '/', $data);
+        return $this->fetchPut('invoice/' . $id . '/', $data);
     }
 
 
@@ -66,7 +72,7 @@ class VyfakturujAPI
      */
     public function getInvoice($id)
     {
-        return $this->_get('invoice/' . $id . '/');
+        return $this->fetchGet('invoice/' . $id . '/');
     }
 
 
@@ -78,7 +84,7 @@ class VyfakturujAPI
      */
     public function getInvoices($args = array())
     {
-        return $this->_get('invoice/?' . http_build_query($args));
+        return $this->fetchGet('invoice/?' . http_build_query($args));
     }
 
 
@@ -92,7 +98,7 @@ class VyfakturujAPI
     public function invoice_sendMail_test($id, $data)
     {
         $data['test'] = true;
-        return $this->_post('invoice/' . $id . '/send-mail/', $data);
+        return $this->fetchPost('invoice/' . $id . '/send-mail/', $data);
     }
 
 
@@ -105,7 +111,7 @@ class VyfakturujAPI
      */
     public function invoice_sendMail($id, $data)
     {
-        return $this->_post('invoice/' . $id . '/send-mail/', $data);
+        return $this->fetchPost('invoice/' . $id . '/send-mail/', $data);
     }
 
 
@@ -117,7 +123,7 @@ class VyfakturujAPI
      */
     public function invoice_sendEet($id)
     {
-        return $this->_post('invoice/' . $id . '/send-eet/');
+        return $this->fetchPost('invoice/' . $id . '/send-eet/');
     }
 
 
@@ -135,7 +141,7 @@ class VyfakturujAPI
         if (!is_null($amount)) {
             $data['amount'] = $amount;
         }
-        return $this->_post('invoice/' . $id . '/payment/', $data);
+        return $this->fetchPost('invoice/' . $id . '/payment/', $data);
     }
 
 
@@ -147,7 +153,7 @@ class VyfakturujAPI
      */
     public function deleteInvoice($id)
     {
-        return $this->_delete('invoice/' . $id . '/');
+        return $this->fetchDelete('invoice/' . $id . '/');
     }
 
 
@@ -159,7 +165,7 @@ class VyfakturujAPI
      */
     public function createContact($data)
     {
-        return $this->_post('contact/', $data);
+        return $this->fetchPost('contact/', $data);
     }
 
 
@@ -172,7 +178,7 @@ class VyfakturujAPI
      */
     public function updateContact($id, $data)
     {
-        return $this->_put('contact/' . $id . '/', $data);
+        return $this->fetchPut('contact/' . $id . '/', $data);
     }
 
 
@@ -184,7 +190,7 @@ class VyfakturujAPI
      */
     public function getContact($id)
     {
-        return $this->_get('contact/' . $id . '/');
+        return $this->fetchGet('contact/' . $id . '/');
     }
 
 
@@ -196,7 +202,7 @@ class VyfakturujAPI
      */
     public function getContacts($args = array())
     {
-        return $this->_get('contact/?' . http_build_query($args));
+        return $this->fetchGet('contact/?' . http_build_query($args));
     }
 
 
@@ -208,7 +214,7 @@ class VyfakturujAPI
      */
     public function deleteContact($id)
     {
-        return $this->_delete('contact/' . $id . '/');
+        return $this->fetchDelete('contact/' . $id . '/');
     }
 
 
@@ -220,7 +226,7 @@ class VyfakturujAPI
      */
     public function createTemplate($data)
     {
-        return $this->_post('template/', $data);
+        return $this->fetchPost('template/', $data);
     }
 
 
@@ -233,7 +239,7 @@ class VyfakturujAPI
      */
     public function updateTemplate($id, $data)
     {
-        return $this->_put('template/' . $id . '/', $data);
+        return $this->fetchPut('template/' . $id . '/', $data);
     }
 
 
@@ -245,7 +251,7 @@ class VyfakturujAPI
      */
     public function getTemplate($id)
     {
-        return $this->_get('template/' . $id . '/');
+        return $this->fetchGet('template/' . $id . '/');
     }
 
 
@@ -257,7 +263,7 @@ class VyfakturujAPI
      */
     public function getTemplates($args = array())
     {
-        return $this->_get('template/?' . http_build_query($args));
+        return $this->fetchGet('template/?' . http_build_query($args));
     }
 
 
@@ -269,7 +275,7 @@ class VyfakturujAPI
      */
     public function deleteTemplate($id)
     {
-        return $this->_delete('template/' . $id . '/');
+        return $this->fetchDelete('template/' . $id . '/');
     }
 
 
@@ -281,7 +287,7 @@ class VyfakturujAPI
      */
     public function getProducts($args = array())
     {
-        return $this->_get('product/?' . http_build_query($args));
+        return $this->fetchGet('product/?' . http_build_query($args));
     }
 
 
@@ -292,7 +298,7 @@ class VyfakturujAPI
      */
     public function getSettings_paymentMethods()
     {
-        return $this->_get('settings/payment-method/');
+        return $this->fetchGet('settings/payment-method/');
     }
 
 
@@ -303,7 +309,7 @@ class VyfakturujAPI
      */
     public function getSettings_numberSeries()
     {
-        return $this->_get('settings/number-series/');
+        return $this->fetchGet('settings/number-series/');
     }
 
 
@@ -314,7 +320,7 @@ class VyfakturujAPI
      */
     public function test()
     {
-        return $this->_get('test/');
+        return $this->fetchGet('test/');
     }
 
 
@@ -328,7 +334,7 @@ class VyfakturujAPI
      */
     public function test_invoice__asPdf($data)
     {
-        $result = $this->_post('test/invoice/download/', $data);
+        $result = $this->fetchPost('test/invoice/download/', $data);
         if (array_key_exists('content', $result)) {
             ob_end_clean();
             $content = base64_decode($result['content']);
@@ -346,10 +352,26 @@ class VyfakturujAPI
     }
 
 
-    private function _connect($path, $method, $data = array())
+    /**
+     * Vrati informace o poslednim spojeni
+     * @return array|null
+     */
+    public function getInfo()
+    {
+        return $this->lastInfo;
+    }
+
+
+    /**
+     * @param $path
+     * @param $method
+     * @param array|null $data
+     * @return array|mixed
+     */
+    private function fetchRequest($path, $method, $data = array())
     {
         $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, static::$URL . $path);
+        curl_setopt($curl, CURLOPT_URL, $this->endpointUrl . $path);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_FAILONERROR, false);
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
@@ -359,15 +381,15 @@ class VyfakturujAPI
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 
         switch ($method) {
-            case self::METHOD_POST:
+            case self::HTTP_METHOD_POST:
                 curl_setopt($curl, CURLOPT_POST, true);
                 curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
                 break;
-            case self::METHOD_PUT:
+            case self::HTTP_METHOD_PUT:
                 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PUT');
                 curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
                 break;
-            case self::METHOD_DELETE:
+            case self::HTTP_METHOD_DELETE:
                 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
                 break;
         }
@@ -382,36 +404,46 @@ class VyfakturujAPI
 
 
     /**
-     * Vrati informace o poslednim spojeni
-     * @return array|null
+     * @param $path
+     * @param array|null $data
+     * @return array|mixed
      */
-    public function getInfo()
+    private function fetchGet($path, $data = null)
     {
-        return $this->lastInfo;
+        return $this->fetchRequest($path, self::HTTP_METHOD_GET, $data);
     }
 
 
-    private function _get($path, $data = null)
+    /**
+     * @param $path
+     * @param array|null $data
+     * @return array|mixed
+     */
+    private function fetchPost($path, $data = null)
     {
-        return $this->_connect($path, self::METHOD_GET, $data);
+        return $this->fetchRequest($path, self::HTTP_METHOD_POST, $data);
     }
 
 
-    private function _post($path, $data = null)
+    /**
+     * @param $path
+     * @param array|null $data
+     * @return array|mixed
+     */
+    private function fetchPut($path, $data = null)
     {
-        return $this->_connect($path, self::METHOD_POST, $data);
+        return $this->fetchRequest($path, self::HTTP_METHOD_PUT, $data);
     }
 
 
-    private function _put($path, $data = null)
+    /**
+     * @param $path
+     * @param array|null $data
+     * @return array|mixed
+     */
+    private function fetchDelete($path, $data = null)
     {
-        return $this->_connect($path, self::METHOD_PUT, $data);
-    }
-
-
-    private function _delete($path, $data = null)
-    {
-        return $this->_connect($path, self::METHOD_DELETE, $data);
+        return $this->fetchRequest($path, self::HTTP_METHOD_DELETE, $data);
     }
 
 }
