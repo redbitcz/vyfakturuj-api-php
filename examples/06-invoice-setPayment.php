@@ -1,27 +1,31 @@
 <?php
 
-include(__DIR__.'/config.php');
+include(__DIR__ . '/00-config.php');
 
 $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN,VYFAKTURUJ_API_KEY);
 
 
+
+
 #
 #
 ####################################################################################
 ####################################################################################
 #####                                                                          #####
-#####                           Odeslání dokumentu do EET                      #####
+#####                             Uhrazení dokladu                             #####
 #####                                                                          #####
 ####################################################################################
 ####################################################################################
 #
 #
 
-$_ID_DOKUMENTU = $_GET['id'];
+$_ID_DOKUMENTU = 54525; // zde zadejte ID dokladu, který chcete uhradit
+$_DATUM_UHRADY = '2016-07-25';
 
-$res = $vyfakturuj_api->invoice_sendEet($_ID_DOKUMENTU);    // Odešleme e-mail
 
-echo '<h2>Tento dokument byl odeslán do EET:</h2>';
+$res = $vyfakturuj_api->invoice_setPayment($_ID_DOKUMENTU,$_DATUM_UHRADY);  // Provedeme uhrazení
+
+echo '<h2>Doklad po uhrazení:</h2>';
 echo '<pre>'.print_r($res,true).'</pre>';
 
 exit;
