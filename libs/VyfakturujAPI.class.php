@@ -48,6 +48,7 @@ class VyfakturujAPI
      *
      * @param array $data Data, která chceme použít při vytvoření.
      * @return array Vrátí kompletní informace o dokumentu
+     * @throws VyfakturujAPIException
      */
     public function createInvoice($data)
     {
@@ -61,6 +62,7 @@ class VyfakturujAPI
      * @param int $id ID dokumentu
      * @param array $data Data, která chceme upravit
      * @return array Vrátí kompletní informace o dokumentu
+     * @throws VyfakturujAPIException
      */
     public function updateInvoice($id, $data)
     {
@@ -73,6 +75,7 @@ class VyfakturujAPI
      *
      * @param int $id ID dokumentu
      * @return array Vrátí kompletní informace o dokumentu
+     * @throws VyfakturujAPIException
      */
     public function getInvoice($id)
     {
@@ -85,6 +88,7 @@ class VyfakturujAPI
      *
      * @param array $args Data pro vyhledání faktury
      * @return array
+     * @throws VyfakturujAPIException
      */
     public function getInvoices($args = array())
     {
@@ -98,6 +102,7 @@ class VyfakturujAPI
      * @param int $id ID faktury
      * @param array $data Data, která chceme použít pro vytvoření šablony.
      * @return array
+     * @throws VyfakturujAPIException
      */
     public function invoice_sendMail_test($id, $data)
     {
@@ -112,6 +117,7 @@ class VyfakturujAPI
      * @param int $id ID faktury
      * @param array $data Data, která chceme použít pro vytvoření e-mailu
      * @return array
+     * @throws VyfakturujAPIException
      */
     public function invoice_sendMail($id, $data)
     {
@@ -124,6 +130,7 @@ class VyfakturujAPI
      *
      * @param int $id
      * @return array
+     * @throws VyfakturujAPIException
      */
     public function invoice_sendEet($id)
     {
@@ -138,6 +145,7 @@ class VyfakturujAPI
      * @param string|null $date Např: 2016-12-31, pokud je nastaveno na 0000-00-00 pak se zruší uhrada dokladu
      * @param int|float $amount Kolik bylo uhrazeno. Pokud je NULL, bude faktura uhrazena nezávisle na částce
      * @return array Detail dokladu po uhrazeni
+     * @throws VyfakturujAPIException
      */
     public function invoice_setPayment($id, $date = null, $amount = null)
     {
@@ -154,6 +162,7 @@ class VyfakturujAPI
      *
      * @param int $id ID dokumentu
      * @return array Vrátí stav operace
+     * @throws VyfakturujAPIException
      */
     public function deleteInvoice($id)
     {
@@ -166,6 +175,7 @@ class VyfakturujAPI
      *
      * @param array $data Data, která chceme použít při vytvoření.
      * @return array Vrátí kompletní informace o kontaktu
+     * @throws VyfakturujAPIException
      */
     public function createContact($data)
     {
@@ -179,6 +189,7 @@ class VyfakturujAPI
      * @param int $id ID kontaktu
      * @param array $data Data, která chceme upravit
      * @return array Vrátí kompletní informace o kontaktu
+     * @throws VyfakturujAPIException
      */
     public function updateContact($id, $data)
     {
@@ -191,6 +202,7 @@ class VyfakturujAPI
      *
      * @param int $id ID kontaktu
      * @return array Vrátí kompletní informace o kontaktu
+     * @throws VyfakturujAPIException
      */
     public function getContact($id)
     {
@@ -203,6 +215,7 @@ class VyfakturujAPI
      *
      * @param array $args
      * @return array
+     * @throws VyfakturujAPIException
      */
     public function getContacts($args = array())
     {
@@ -215,6 +228,7 @@ class VyfakturujAPI
      *
      * @param int $id ID kontaktu
      * @return array Vrátí stav operace
+     * @throws VyfakturujAPIException
      */
     public function deleteContact($id)
     {
@@ -227,6 +241,7 @@ class VyfakturujAPI
      *
      * @param array $data Data, která chceme použít při vytvoření.
      * @return array Vrátí kompletní informace o položce
+     * @throws VyfakturujAPIException
      */
     public function createTemplate($data)
     {
@@ -240,6 +255,7 @@ class VyfakturujAPI
      * @param int $id ID šablony|pravidelné faktury
      * @param array $data Data, která chceme upravit
      * @return array Vrátí kompletní informace o položce
+     * @throws VyfakturujAPIException
      */
     public function updateTemplate($id, $data)
     {
@@ -252,6 +268,7 @@ class VyfakturujAPI
      *
      * @param int $id ID šablony|pravidelné faktury
      * @return array Vrátí kompletní informace
+     * @throws VyfakturujAPIException
      */
     public function getTemplate($id)
     {
@@ -264,6 +281,7 @@ class VyfakturujAPI
      *
      * @param array $args Data pro vyhledání faktur
      * @return array
+     * @throws VyfakturujAPIException
      */
     public function getTemplates($args = array())
     {
@@ -276,6 +294,7 @@ class VyfakturujAPI
      *
      * @param int $id ID šablony|pravidelné faktury
      * @return array Vrátí stav operace
+     * @throws VyfakturujAPIException
      */
     public function deleteTemplate($id)
     {
@@ -288,6 +307,7 @@ class VyfakturujAPI
      *
      * @param array $args Data pro vyhledání faktur
      * @return array
+     * @throws VyfakturujAPIException
      */
     public function getProducts($args = array())
     {
@@ -299,6 +319,7 @@ class VyfakturujAPI
      * Vrati seznam platebních metod
      *
      * @return array
+     * @throws VyfakturujAPIException
      */
     public function getSettings_paymentMethods()
     {
@@ -310,6 +331,7 @@ class VyfakturujAPI
      * Vrati seznam číselných řad
      *
      * @return array
+     * @throws VyfakturujAPIException
      */
     public function getSettings_numberSeries()
     {
@@ -321,6 +343,7 @@ class VyfakturujAPI
      * Testovací funkce pro ověření správného spojení se serverem
      *
      * @return array
+     * @throws VyfakturujAPIException
      */
     public function test()
     {
@@ -335,6 +358,7 @@ class VyfakturujAPI
      *
      * @param array $data
      * @return array
+     * @throws VyfakturujAPIException
      */
     public function test_invoice__asPdf($data)
     {
@@ -358,6 +382,7 @@ class VyfakturujAPI
 
     /**
      * Vrati informace o poslednim spojeni
+     *
      * @return array|null
      */
     public function getInfo()
@@ -371,6 +396,7 @@ class VyfakturujAPI
      * @param $method
      * @param array|null $data
      * @return array|mixed
+     * @throws VyfakturujAPIException
      */
     private function fetchRequest($path, $method, $data = array())
     {
@@ -401,7 +427,13 @@ class VyfakturujAPI
         $response = curl_exec($curl);
         $this->lastInfo = curl_getinfo($curl);
         $this->lastInfo['dataSend'] = $data;
+
+        if (curl_errno($curl) !== 0) {
+            throw new VyfakturujAPIException(curl_error($curl), curl_errno($curl));
+        }
+
         curl_close($curl);
+
         $return = json_decode($response, true);
         return is_array($return) ? $return : $response;
     }
@@ -411,6 +443,7 @@ class VyfakturujAPI
      * @param $path
      * @param array|null $data
      * @return array|mixed
+     * @throws VyfakturujAPIException
      */
     private function fetchGet($path, $data = null)
     {
@@ -422,6 +455,7 @@ class VyfakturujAPI
      * @param $path
      * @param array|null $data
      * @return array|mixed
+     * @throws VyfakturujAPIException
      */
     private function fetchPost($path, $data = null)
     {
@@ -433,6 +467,7 @@ class VyfakturujAPI
      * @param $path
      * @param array|null $data
      * @return array|mixed
+     * @throws VyfakturujAPIException
      */
     private function fetchPut($path, $data = null)
     {
@@ -444,6 +479,7 @@ class VyfakturujAPI
      * @param $path
      * @param array|null $data
      * @return array|mixed
+     * @throws VyfakturujAPIException
      */
     private function fetchDelete($path, $data = null)
     {
