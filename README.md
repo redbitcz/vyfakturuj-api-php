@@ -10,7 +10,16 @@ Nainstalujte knihovnu pomocí Composeru (doporučujeme):
 ```shell
 composer require vyfakturuj/vyfakturuj-api-php
 ```
-Případně si můžete [stáhnout poslední verzi v ZIP souboru](https://github.com/vyfakturuj/vyfakturuj-api-php/releases/latest).
+a následně na začátek vašeho projektu (nejčastěji `index.php`) přidejte kód pro načtení závislostí:
+```php
+require __DIR__ . '/vendor/autoload.php';
+```
+
+Případně si můžete [stáhnout poslední verzi v ZIP souboru](manual-installation.md).
+
+**Důležité:** Pokud ve svém projektu již používáte Vyfakturuj, nebo [SimpleShop](https://www.simpleshop.cz/)
+(např. [WordPress plugin](https://www.simpleshop.cz/category/wordpress-plugin/)), ujistěte se, že nemáte knihovnu
+v projektu vícekrát. 
 
 Ve své aplikaci pak jednoduše vytvoříte objekt `VyfakturujAPI`:
 ```php
