@@ -2,7 +2,7 @@
 /**
  * @package Redbit\Vyfakturuj\VyfakturujAPI
  * @license MIT
- * @coypright 2016-2018 Redbit s.r.o.
+ * @copyright 2016-2018 Redbit s.r.o.
  * @author Redbit s.r.o. <info@vyfakturuj.cz>
  * @author Ing. Martin Dostál
  */

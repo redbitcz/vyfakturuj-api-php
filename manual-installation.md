@@ -2,7 +2,7 @@
 
 > **Doporučujeme, abyste namísto ruční instalace Vyfakturuj API využili [instalaci přes Composer](README.md#instalace)** 
 
-Pokud nemůžete nebo nechcete [istalovat tuto knihovnu přes Composer](README.md#instalace), můžete si
+Pokud nemůžete nebo nechcete [instalovat tuto knihovnu přes Composer](README.md#instalace), můžete si
 stáhnout [poslední verzi v ZIP souboru](https://github.com/vyfakturuj/vyfakturuj-api-php/releases/latest).
 
 Tento ZIP rozbalte, tuto složku pak nahrajte do svého webu a následně na začátek vašeho projektu (nejčastěji `index.php`)
