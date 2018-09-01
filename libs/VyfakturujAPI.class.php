@@ -406,9 +406,12 @@ class VyfakturujAPI
         curl_setopt($curl, CURLOPT_FAILONERROR, false);
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($curl, CURLOPT_USERPWD, $this->login . ':' . $this->apiHash);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+        // Set SSL verification
+        $this->curlInjectCaCerts($curl);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 
         switch ($method) {
             case self::HTTP_METHOD_POST:
@@ -436,6 +439,22 @@ class VyfakturujAPI
 
         $return = json_decode($response, true);
         return is_array($return) ? $return : $response;
+    }
+
+
+    /**
+     * @param resource $curl cURL handle
+     */
+    private function curlInjectCaCerts($curl)
+    {
+        if (class_exists('\Composer\CaBundle\CaBundle')) {
+            $caPathOrFile = \Composer\CaBundle\CaBundle::getSystemCaRootBundlePath();
+            if (is_dir($caPathOrFile) || (is_link($caPathOrFile) && is_dir(readlink($caPathOrFile)))) {
+                curl_setopt($curl, CURLOPT_CAPATH, $caPathOrFile);
+            } else {
+                curl_setopt($curl, CURLOPT_CAINFO, $caPathOrFile);
+            }
+        }
     }
 
 
