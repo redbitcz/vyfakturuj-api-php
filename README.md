@@ -17,6 +17,10 @@ require __DIR__ . '/vendor/autoload.php';
 
 Případně si můžete [stáhnout poslední verzi v ZIP souboru](manual-installation.md).
 
+**Důležité:** Pokud ve svém projektu již používáte Vyfakturuj, nebo [SimpleShop](https://www.simpleshop.cz/)
+(např. [WordPress plugin](https://www.simpleshop.cz/category/wordpress-plugin/)), ujistěte se, že nemáte knihovnu
+v projektu vícekrát. 
+
 Ve své aplikaci pak jednoduše vytvoříte objekt `VyfakturujAPI`:
 ```php
 $vyfakturuj = new VyfakturujAPI('login', 'API klíč');
