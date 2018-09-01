@@ -412,7 +412,7 @@ class VyfakturujAPI
      * @param array|null $data
      * @return array|mixed
      */
-    private function fetchGet($path, $data = null)
+    protected function fetchGet($path, $data = null)
     {
         return $this->fetchRequest($path, self::HTTP_METHOD_GET, $data);
     }
@@ -423,7 +423,7 @@ class VyfakturujAPI
      * @param array|null $data
      * @return array|mixed
      */
-    private function fetchPost($path, $data = null)
+    protected function fetchPost($path, $data = null)
     {
         return $this->fetchRequest($path, self::HTTP_METHOD_POST, $data);
     }
@@ -434,7 +434,7 @@ class VyfakturujAPI
      * @param array|null $data
      * @return array|mixed
      */
-    private function fetchPut($path, $data = null)
+    protected function fetchPut($path, $data = null)
     {
         return $this->fetchRequest($path, self::HTTP_METHOD_PUT, $data);
     }
@@ -445,7 +445,7 @@ class VyfakturujAPI
      * @param array|null $data
      * @return array|mixed
      */
-    private function fetchDelete($path, $data = null)
+    protected function fetchDelete($path, $data = null)
     {
         return $this->fetchRequest($path, self::HTTP_METHOD_DELETE, $data);
     }
