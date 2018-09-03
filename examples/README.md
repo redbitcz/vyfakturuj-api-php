@@ -1,4 +1,4 @@
-# Příklady použití [PHP knihovny Vyfakturuj API](https://github.com/vyfakturuj/vyfakturuj-api-php)
+# Příklady použití [PHP knihovny Vyfakturuj API](https://github.com/redbitcz/vyfakturuj-api-php)
 
 ## Příprava pro použití příkladů
 Aby Vám níže uvedené příklady fungovaly, nastavte si nejdříve přihlášení do vašeho účtu. 

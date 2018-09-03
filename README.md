@@ -42,4 +42,4 @@ Knihovna pro správné fungování potřebuje:
 Příklady použití knihovny jsou [popsány ve složce `examples`](/examples/#readme).
 
 ## Changelog
-Přehled verzí a změn: https://github.com/vyfakturuj/vyfakturuj-api-php/releases
+Přehled verzí a změn: https://github.com/redbitcz/vyfakturuj-api-php/releases

@@ -9,7 +9,7 @@
 
 /**
  * Script pro ruční instalaci
- * @see https://github.com/vyfakturuj/vyfakturuj-api-php/blob/master/manual-installation.md (Nápověda)
+ * @see https://github.com/redbitcz/vyfakturuj-api-php/blob/master/manual-installation.md (Nápověda)
  */
 spl_autoload_register(function ($class) {
     $file = __DIR__ . '/libs/' . $class . '.class.php';
