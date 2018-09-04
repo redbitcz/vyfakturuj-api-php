@@ -2,6 +2,8 @@
 
 require_once __DIR__ . '/00-config.php';
 
+echo "<h2>Vytvoření a úpravy kontaktu</h2>\n";
+
 $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 
 #
@@ -31,8 +33,8 @@ $opt = array(
 
 $contact = $vyfakturuj_api->createContact($opt);    // vytvoříme novou fakturu
 
-echo '<h2>Vytvořili jsme kontakt:</h2>';
-echo '<pre>' . print_r($contact, true) . '</pre>';
+echo '<h5>Vytvořili jsme kontakt:</h5>';
+echo '<pre><code class="json">' . json_encode($contact, JSON_PRETTY_PRINT) . '</code></pre>';
 
 $_ID_KONTAKTU = $contact['id'];    // uložíme si ID nového kontaktu
 #
@@ -53,8 +55,8 @@ $opt = array(
 
 $contact2 = $vyfakturuj_api->updateContact($_ID_KONTAKTU, $opt);    // upravíme kontakt
 
-echo '<h2>Upravili jsme fakturu:</h2>';
-echo '<pre>' . print_r($contact2, true) . '</pre>';
+echo '<h5>Upravili jsme fakturu:</h5>';
+echo '<pre><code class="json">' . json_encode($contact2, JSON_PRETTY_PRINT) . '</code></pre>';
 
 
 #
@@ -73,8 +75,8 @@ echo '<pre>' . print_r($contact2, true) . '</pre>';
 $contact3 = $vyfakturuj_api->getContact($_ID_KONTAKTU); // načte 1 konkrétní kontakt
 // $contact3 = $vyfakturuj_api->getContacts();  // vrátí všechny moje kontakty
 
-echo '<h2>Načetli jsme data o kontaktu ze systému:</h2>';
-echo '<pre>' . print_r($contact3, true) . '</pre>';
+echo '<h5>Načetli jsme data o kontaktu ze systému:</h5>';
+echo '<pre><code class="json">' . json_encode($contact3, JSON_PRETTY_PRINT) . '</code></pre>';
 
 
 #
@@ -93,8 +95,5 @@ exit;   // zablokování smazání
 
 $contact4 = $vyfakturuj_api->deleteContact($_ID_KONTAKTU);
 
-echo '<h2>Načetli jsme data o průběhu smazání kontaktu ze systému:</h2>';
-echo '<pre>' . print_r($contact4, true) . '</pre>';
-
-
-exit;
+echo '<h5>Načetli jsme data o průběhu smazání kontaktu ze systému:</h5>';
+echo '<pre><code class="json">' . json_encode($contact4, JSON_PRETTY_PRINT) . '</code></pre>';

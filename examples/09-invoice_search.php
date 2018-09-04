@@ -2,6 +2,8 @@
 
 require_once __DIR__ . '/00-config.php';
 
+echo "<h2>Vyhledání faktur</h2>\n";
+
 $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 
 /*
@@ -19,8 +21,5 @@ $opt = array(
 
 $inv = $vyfakturuj_api->getInvoices($opt);
 
-echo '<h2>Načetli jsme tyto doklady:</h2>';
-echo '<pre>' . print_r($inv, true) . '</pre>';
-
-
-exit;
+echo '<h5>Načetli jsme tyto doklady:</h5>';
+echo '<pre><code class="json">' . json_encode($inv, JSON_PRETTY_PRINT) . '</code></pre>';

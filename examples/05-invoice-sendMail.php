@@ -2,6 +2,8 @@
 
 require_once __DIR__ . '/00-config.php';
 
+echo "<h2>Odeslání e-mailu</h2>\n";
+
 $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 
 #
@@ -36,8 +38,8 @@ $opt = array(// šablona, kterou si přejeme odeslat
 
 $res = $vyfakturuj_api->invoice_sendMail_test($_ID_DOKUMENTU, $opt);    // Získáme šablonu, co by se odeslalo
 
-echo '<h2>Tento mail by se odeslal:</h2>';
-echo '<pre>' . print_r($res, true) . '</pre>';
+echo '<h5>Tento mail by se odeslal:</h5>';
+echo '<pre><code class="json">' . json_encode($res, JSON_PRETTY_PRINT) . '</code></pre>';
 
 
 #
@@ -55,7 +57,5 @@ die('<span style="color:red">Odkomentujte řádek ' . __LINE__ . ' pokud chcete 
 
 $res = $vyfakturuj_api->invoice_sendMail($_ID_DOKUMENTU, $opt);    // Odešleme e-mail
 
-echo '<h2>Tento e-mail byl odeslán:</h2>';
-echo '<pre>' . print_r($res, true) . '</pre>';
-
-exit;
+echo '<h5>Tento e-mail byl odeslán:</h5>';
+echo '<pre><code class="json">' . json_encode($res, JSON_PRETTY_PRINT) . '</code></pre>';
