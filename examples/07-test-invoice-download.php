@@ -2,6 +2,8 @@
 
 require_once __DIR__ . '/00-config.php';
 
+echo "<h2>Stažení faktury v PDF</h2>\n";
+
 $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 
 $opt = array(
@@ -33,8 +35,5 @@ $opt = array(
 
 $result = $vyfakturuj_api->test_invoice__asPdf($opt);
 
-echo '<h2>Nepodařilo se stáhnout PDF:</h2>';
-echo '<pre>' . print_r($result, true) . '</pre>';
-
-
-exit;
+echo '<h5>Nepodařilo se stáhnout PDF:</h5>';
+echo '<pre><code class="json">' . json_encode($result, JSON_PRETTY_PRINT) . '</code></pre>';

@@ -2,6 +2,8 @@
 
 require_once __DIR__ . '/00-config.php';
 
+echo "<h2>Vyhledání produktů</h2>\n";
+
 $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 
 $opt = array(
@@ -12,8 +14,5 @@ $opt = array(
 
 $ret = $vyfakturuj_api->getProducts($opt);
 
-echo '<h2>Načetli jsme tyto produkty:</h2>';
-echo '<pre>' . print_r($ret, true) . '</pre>';
-
-
-exit;
+echo '<h5>Načetli jsme tyto produkty:</h5>';
+echo '<pre><code class="json">' . json_encode($ret, JSON_PRETTY_PRINT) . '</code></pre>';

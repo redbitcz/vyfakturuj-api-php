@@ -2,6 +2,8 @@
 
 require_once __DIR__ . '/00-config.php';
 
+echo "<h2>Provedení uhrazení dokladu</h2>\n";
+
 $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 
 
@@ -23,7 +25,5 @@ $_DATUM_UHRADY = '2016-07-25';
 
 $res = $vyfakturuj_api->invoice_setPayment($_ID_DOKUMENTU, $_DATUM_UHRADY);  // Provedeme uhrazení
 
-echo '<h2>Doklad po uhrazení:</h2>';
-echo '<pre>' . print_r($res, true) . '</pre>';
-
-exit;
+echo '<h5>Doklad po uhrazení:</h5>';
+echo '<pre><code class="json">' . json_encode($res, JSON_PRETTY_PRINT) . '</code></pre>';
