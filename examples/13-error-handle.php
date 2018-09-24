@@ -33,6 +33,9 @@ try {
     // Vypíšeme uživateli omluvu, že se nepodařilo jeho požadavek dokončit
     // Uživatele nezatěžujeme technickými detaily, ty nechme technikovi
     echo "<div class=\"alert alert-danger\">Je nám líto, ale při zpracování došlo k chybě. Zkuste to prosím později, nebo nás kontaktujte.</div>\n";
+
+    // Technikovi zapíšeme chybu do logů, aby věděl, co se děje
+    trigger_error($e, E_USER_WARNING);
 }
 
 // Aplikace pokračuje dál
