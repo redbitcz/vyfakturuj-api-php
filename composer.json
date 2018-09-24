@@ -15,7 +15,9 @@
         "email": "info@vyfakturuj.cz"
     },
     "autoload": {
-        "classmap": ["libs/"]
+        "psr-4": {
+            "": "src/"
+        }
     },
     "require": {
         "php": ">=5.3.2",
