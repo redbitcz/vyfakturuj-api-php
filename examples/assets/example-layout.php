@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Redbit\Vyfakturuj\VyfakturujAPI
+ * @package Redbit\Vyfakturuj\VyfakturujApi
  * @license MIT
  * @copyright 2016-2018 Redbit s.r.o.
  * @author Redbit s.r.o. <info@vyfakturuj.cz>
@@ -29,11 +29,11 @@ if ($web):
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/json.min.js" integrity="sha256-KPdGtw3AdDen/v6+9ue/V3m+9C2lpNiuirroLsHrJZM=" crossorigin="anonymous"></script>
         <script>hljs.initHighlightingOnLoad();</script>
-        <title>VyfakturujAPI - příklady</title>
+        <title>VyfakturujApi - příklady</title>
     </head>
     <body>
         <div class="container">
-            <h1 class="mt-5"><a href="https://www.vyfakturuj.cz/api/">VyfakturujAPI</a> příklad</h1>
+            <h1 class="mt-5"><a href="https://www.vyfakturuj.cz/api/">VyfakturujApi</a> příklad</h1>
             <div class="jumbotron mt-3">
     <?php
 endif;

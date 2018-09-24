@@ -4,7 +4,7 @@ require_once __DIR__ . '/00-config.php';
 
 echo "<h2>Stažení faktury v PDF</h2>\n";
 
-$vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
+$vyfakturuj_api = new VyfakturujApi(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 
 $opt = array(
     'customer_IC' => '123456789',

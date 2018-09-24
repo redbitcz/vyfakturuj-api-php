@@ -5,7 +5,7 @@ require_once __DIR__ . '/00-config.php';
 
 
 // Pomocná třída pro ukázku, která je záměrně poškozená, aby selhala
-class VyfakturujBrokenAPI extends VyfakturujAPI
+class VyfakturujBrokenApi extends VyfakturujApi
 {
     protected $endpointUrl = 'https://invalid.domain.vyfakturuj.cz/2.0/';
 }
@@ -24,11 +24,11 @@ try {
     // Ukázka stejná, jako v příkladu 01-test.php
     echo "<h2>Ošetření chyb</h2>\n";
 
-    $vyfakturuj_api = new VyfakturujBrokenAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
+    $vyfakturuj_api = new VyfakturujBrokenApi(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
     $result = $vyfakturuj_api->test();
 
     echo '<pre><code class="json">' . json_encode($result, JSON_PRETTY_PRINT) . '</code></pre>';
-} catch (VyfakturujAPIException $e) {
+} catch (VyfakturujApiException $e) {
     // Toto se spustí, pokud kdekoliv v try {...} dojde k chybě (tzv. výjimce)
     // Vypíšeme uživateli omluvu, že se nepodařilo jeho požadavek dokončit
     // Uživatele nezatěžujeme technickými detaily, ty nechme technikovi

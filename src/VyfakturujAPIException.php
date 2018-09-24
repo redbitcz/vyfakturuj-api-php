@@ -1,5 +1,5 @@
 <?php
 
-class VyfakturujAPIException extends \RuntimeException
+class VyfakturujApiException extends \RuntimeException
 {
 }

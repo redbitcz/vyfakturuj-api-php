@@ -21,9 +21,9 @@ Případně si můžete [stáhnout poslední verzi v ZIP souboru](manual-install
 (např. [WordPress plugin](https://www.simpleshop.cz/category/wordpress-plugin/)), ujistěte se, že nemáte knihovnu
 v projektu vícekrát. 
 
-Ve své aplikaci pak jednoduše vytvoříte objekt `VyfakturujAPI`:
+Ve své aplikaci pak jednoduše vytvoříte objekt `VyfakturujApi`:
 ```php
-$vyfakturuj = new VyfakturujAPI('login', 'API klíč');
+$vyfakturuj = new VyfakturujApi('login', 'API klíč');
 ```
 Váš `login` a `API klíč` najdete v [nastavení API ve Vyfakturuj](https://app.vyfakturuj.cz/nastaveni/api/).
 

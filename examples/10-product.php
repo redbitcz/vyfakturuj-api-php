@@ -4,7 +4,7 @@ require_once __DIR__ . '/00-config.php';
 
 echo "<h2>Vyhledání produktů</h2>\n";
 
-$vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
+$vyfakturuj_api = new VyfakturujApi(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 
 $opt = array(
     'date_created_from' => '2016-10-01',

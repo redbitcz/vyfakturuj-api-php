@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Redbit\Vyfakturuj\VyfakturujAPI
+ * @package Redbit\Vyfakturuj\VyfakturujApi
  * @license MIT
  * @copyright 2016-2018 Redbit s.r.o.
  * @author Redbit s.r.o. <info@vyfakturuj.cz>
