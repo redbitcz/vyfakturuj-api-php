@@ -67,3 +67,8 @@ Ukázka, jak získat seznam platebních metod (způsobů uhrady).
 > Soubor: [12-number-series.php](12-number-series.php)
 
 Ukázka, jak získat seznam číslených řad.
+
+### 13. Ošetření chyb
+> Soubor: [13-error-handle.php](13-error-handle.php)
+
+Ukázka, jak ošetřit chyby, které mohou při použití knihovny vzniknout.
