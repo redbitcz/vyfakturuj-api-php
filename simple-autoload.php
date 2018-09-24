@@ -12,7 +12,7 @@
  * @see https://github.com/redbitcz/vyfakturuj-api-php/blob/master/manual-installation.md (Nápověda)
  */
 spl_autoload_register(function ($class) {
-    $file = __DIR__ . '/libs/' . $class . '.class.php';
+    $file = __DIR__ . '/src/' . $class . '.php';
     if (file_exists($file)) {
         require $file;
     }
