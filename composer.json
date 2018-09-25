@@ -12,7 +12,8 @@
         }
     ],
     "support": {
-        "email": "info@vyfakturuj.cz"
+        "email": "info@vyfakturuj.cz",
+        "issues": "https://github.com/redbitcz/vyfakturuj-api-php/issues"
     },
     "autoload": {
         "psr-4": {
