@@ -1,5 +1,7 @@
 <?php
 
+use Redbit\Vyfakturuj\Api\VyfakturujApi;
+
 require_once __DIR__ . '/00-config.php';
 
 echo "<h2>Vytvoření a úpravy šablony</h2>\n";
@@ -38,7 +40,7 @@ $_ID_CONTACT = $contact['id'];
  * Některá čísla v příkladu níže jsou číselná označení systémových typů.
  * Například: 'type' => 2 znamená, že vytváříme Pravidelnou fakturu, nikoliv jen Šablonu.
  * Popis všech hodnot najdete v dokumentaci: https://vyfakturujcz.docs.apiary.io/#reference/faktury
- * Zkušenější uživatelé mohou použít výčet možných hodnot v přiložené třídě VyfakturujEnum.
+ * Zkušenější uživatelé mohou použít výčet možných hodnot v přiložené třídě Redbit\Vyfakturuj\Api\VyfakturujEnum.
  */
 $opt_template = array(
     'id_customer' => $_ID_CONTACT,// vložíme právě vytvořený kontakt

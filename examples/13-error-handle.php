@@ -1,5 +1,8 @@
 <?php
 
+use Redbit\Vyfakturuj\Api\VyfakturujApi;
+use Redbit\Vyfakturuj\Api\VyfakturujApiException;
+
 require_once __DIR__ . '/00-config.php';
 
 

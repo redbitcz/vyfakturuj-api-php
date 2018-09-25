@@ -1,5 +1,7 @@
 <?php
 
+use Redbit\Vyfakturuj\Api\VyfakturujApi;
+
 require_once __DIR__ . '/00-config.php';
 
 echo "<h2>Vytvoření a úpravy kontaktu</h2>\n";
