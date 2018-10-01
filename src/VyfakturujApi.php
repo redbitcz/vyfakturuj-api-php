@@ -412,7 +412,7 @@ class VyfakturujApi
      * @return array|mixed
      * @throws VyfakturujApiException
      */
-    private function fetchRequest($path, $method, $data = array())
+    protected function fetchRequest($path, $method, $data = array())
     {
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $this->endpointUrl . $path);
@@ -466,7 +466,7 @@ class VyfakturujApi
     /**
      * @param resource $curl cURL handle
      */
-    private function curlInjectCaCerts($curl)
+    protected function curlInjectCaCerts($curl)
     {
         if (class_exists('\Composer\CaBundle\CaBundle')) {
             $caPathOrFile = \Composer\CaBundle\CaBundle::getSystemCaRootBundlePath();
