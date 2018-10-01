@@ -423,6 +423,10 @@ class VyfakturujApi
         curl_setopt($curl, CURLOPT_USERPWD, $this->login . ':' . $this->apiHash);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 
+        if(defined('CURLOPT_ENCODING')) { // PHP < 7.1 compatibility
+            curl_setopt($curl, CURLOPT_ENCODING, '');
+        }
+
         // Set SSL verification
         $this->curlInjectCaCerts($curl);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
