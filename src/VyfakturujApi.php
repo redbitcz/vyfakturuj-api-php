@@ -153,8 +153,8 @@ class VyfakturujApi
      */
     public function invoice_setPayment($id, $date = null, $amount = null)
     {
-        $data = array('date' => is_null($date) ? date('Y-m-d') : $date);
-        if (!is_null($amount)) {
+        $data = array('date' => $date === null ? date('Y-m-d') : $date);
+        if ($amount !== null) {
             $data['amount'] = $amount;
         }
         return $this->fetchPost('invoice/' . $id . '/payment/', $data);
