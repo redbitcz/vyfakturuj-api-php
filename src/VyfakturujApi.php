@@ -94,7 +94,7 @@ class VyfakturujApi
      * @return array
      * @throws VyfakturujApiException
      */
-    public function getInvoices($args = array())
+    public function getInvoices(array $args = array())
     {
         return $this->fetchGet('invoice/?' . http_build_query($args));
     }
@@ -221,7 +221,7 @@ class VyfakturujApi
      * @return array
      * @throws VyfakturujApiException
      */
-    public function getContacts($args = array())
+    public function getContacts(array $args = array())
     {
         return $this->fetchGet('contact/?' . http_build_query($args));
     }
@@ -287,7 +287,7 @@ class VyfakturujApi
      * @return array
      * @throws VyfakturujApiException
      */
-    public function getTemplates($args = array())
+    public function getTemplates(array $args = array())
     {
         return $this->fetchGet('template/?' . http_build_query($args));
     }
@@ -313,7 +313,7 @@ class VyfakturujApi
      * @return array
      * @throws VyfakturujApiException
      */
-    public function getProducts($args = array())
+    public function getProducts(array $args = array())
     {
         return $this->fetchGet('product/?' . http_build_query($args));
     }
