@@ -32,6 +32,9 @@ class VyfakturujApi
     /** @var null|array */
     protected $lastInfo;
 
+    /** @var null|string */
+    protected $lastResponseHeaders;
+
 
     /**
      * @param string $login
@@ -393,6 +396,16 @@ class VyfakturujApi
 
 
     /**
+     * @internal
+     * @return null|string
+     */
+    public function getLastResponseHeaders()
+    {
+        return $this->lastResponseHeaders;
+    }
+
+
+    /**
      * @param $path
      * @param $method
      * @param array|null $data
@@ -404,6 +417,7 @@ class VyfakturujApi
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $this->endpointUrl . $path);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HEADER, true);
         curl_setopt($curl, CURLOPT_FAILONERROR, false);
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($curl, CURLOPT_USERPWD, $this->login . ':' . $this->apiHash);
@@ -436,10 +450,16 @@ class VyfakturujApi
             throw new VyfakturujApiException(curl_error($curl), curl_errno($curl));
         }
 
+        $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+        $responseHeaders = substr($response, 0, $header_size);
+        $body = substr($response, $header_size);
+
         curl_close($curl);
 
-        $return = json_decode($response, true);
-        return is_array($return) ? $return : $response;
+        $this->lastResponseHeaders = $this->parseHeaders($responseHeaders);
+
+        $return = json_decode($body, true);
+        return is_array($return) ? $return : $body;
     }
 
 
@@ -506,4 +526,22 @@ class VyfakturujApi
         return $this->fetchRequest($path, self::HTTP_METHOD_DELETE, $data);
     }
 
+
+    /**
+     * @param string $stringHeaders
+     * @return array
+     */
+    private function parseHeaders($stringHeaders)
+    {
+        $headers = array();
+
+        foreach (explode("\n", $stringHeaders) as $header) {
+            $segments = explode(':', $header, 2);
+            if (count($header) === 2) {
+                $headers[$segments[0]] = trim($segments[1]);
+            }
+        }
+
+        return $headers;
+    }
 }
