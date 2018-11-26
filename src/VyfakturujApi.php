@@ -9,16 +9,18 @@
 
 namespace Redbit\Vyfakturuj\Api;
 
+use Composer\CaBundle\CaBundle;
+
 /**
  * Třída pro práci s API Vyfakturuj.cz
  */
 class VyfakturujApi
 {
     // HTTP methods
-    const HTTP_METHOD_POST = 'POST';
-    const HTTP_METHOD_GET = 'GET';
-    const HTTP_METHOD_DELETE = 'DELETE';
-    const HTTP_METHOD_PUT = 'PUT';
+    public const HTTP_METHOD_POST = 'POST';
+    public const HTTP_METHOD_GET = 'GET';
+    public const HTTP_METHOD_DELETE = 'DELETE';
+    public const HTTP_METHOD_PUT = 'PUT';
 
     /** @var string */
     protected $endpointUrl = 'https://api.vyfakturuj.cz/2.0/';
@@ -153,7 +155,7 @@ class VyfakturujApi
      */
     public function invoice_setPayment($id, $date = null, $amount = null)
     {
-        $data = array('date' => $date === null ? date('Y-m-d') : $date);
+        $data = array('date' => $date ?? date('Y-m-d'));
         if ($amount !== null) {
             $data['amount'] = $amount;
         }
@@ -376,7 +378,7 @@ class VyfakturujApi
             header('Content-Disposition: attachment; filename="' . $filename . '.pdf"');
             header('Content-type: application/pdf');
             header('Content-Transfer-Encoding: binary');
-            header('Content-Length: ' . strlen($content));
+            header('Content-Length: ' . \strlen($content));
             echo $content;
             exit;
         }
@@ -422,10 +424,7 @@ class VyfakturujApi
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($curl, CURLOPT_USERPWD, $this->login . ':' . $this->apiHash);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-
-        if(defined('CURLOPT_ENCODING')) { // PHP < 7.1 compatibility
-            curl_setopt($curl, CURLOPT_ENCODING, '');
-        }
+        curl_setopt($curl, CURLOPT_ENCODING, '');
 
         // Set SSL verification
         $this->curlInjectCaCerts($curl);
@@ -463,17 +462,17 @@ class VyfakturujApi
         $this->lastResponseHeaders = $this->parseHeaders($responseHeaders);
 
         $return = json_decode($body, true);
-        return is_array($return) ? $return : $body;
+        return \is_array($return) ? $return : $body;
     }
 
 
     /**
      * @param resource $curl cURL handle
      */
-    protected function curlInjectCaCerts($curl)
+    protected function curlInjectCaCerts($curl): void
     {
-        if (class_exists('\Composer\CaBundle\CaBundle')) {
-            $caPathOrFile = \Composer\CaBundle\CaBundle::getSystemCaRootBundlePath();
+        if (class_exists(CaBundle::class)) {
+            $caPathOrFile = CaBundle::getSystemCaRootBundlePath();
             if (is_dir($caPathOrFile) || (is_link($caPathOrFile) && is_dir(readlink($caPathOrFile)))) {
                 curl_setopt($curl, CURLOPT_CAPATH, $caPathOrFile);
             } else {
@@ -541,7 +540,7 @@ class VyfakturujApi
 
         foreach (explode("\n", $stringHeaders) as $header) {
             $segments = explode(':', $header, 2);
-            if (count($header) === 2) {
+            if (\count($header) === 2) {
                 $headers[$segments[0]] = trim($segments[1]);
             }
         }
