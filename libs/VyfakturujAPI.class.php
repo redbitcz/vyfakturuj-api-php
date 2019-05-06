@@ -90,7 +90,7 @@ class VyfakturujAPI
      * @return array
      * @throws VyfakturujAPIException
      */
-    public function getInvoices($args = array())
+    public function getInvoices($args = [])
     {
         return $this->fetchGet('invoice/?' . http_build_query($args));
     }
@@ -149,8 +149,11 @@ class VyfakturujAPI
      */
     public function invoice_setPayment($id, $date = null, $amount = null)
     {
-        $data = array('date' => is_null($date) ? date('Y-m-d') : $date);
-        if (!is_null($amount)) {
+        /** @var string $date */
+        $date = $date === null ? (string)date('Y-m-d') : $date;
+
+        $data = ['date' => $date];
+        if ($amount !== null) {
             $data['amount'] = $amount;
         }
         return $this->fetchPost('invoice/' . $id . '/payment/', $data);
@@ -217,7 +220,7 @@ class VyfakturujAPI
      * @return array
      * @throws VyfakturujAPIException
      */
-    public function getContacts($args = array())
+    public function getContacts($args = [])
     {
         return $this->fetchGet('contact/?' . http_build_query($args));
     }
@@ -283,7 +286,7 @@ class VyfakturujAPI
      * @return array
      * @throws VyfakturujAPIException
      */
-    public function getTemplates($args = array())
+    public function getTemplates($args = [])
     {
         return $this->fetchGet('template/?' . http_build_query($args));
     }
@@ -309,7 +312,7 @@ class VyfakturujAPI
      * @return array
      * @throws VyfakturujAPIException
      */
-    public function getProducts($args = array())
+    public function getProducts($args = [])
     {
         return $this->fetchGet('product/?' . http_build_query($args));
     }
@@ -398,7 +401,7 @@ class VyfakturujAPI
      * @return array|mixed
      * @throws VyfakturujAPIException
      */
-    private function fetchRequest($path, $method, $data = array())
+    private function fetchRequest($path, $method, $data = [])
     {
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $this->endpointUrl . $path);
@@ -406,7 +409,7 @@ class VyfakturujAPI
         curl_setopt($curl, CURLOPT_FAILONERROR, false);
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($curl, CURLOPT_USERPWD, $this->login . ':' . $this->apiHash);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
 
         // Set SSL verification
         $this->curlInjectCaCerts($curl);
@@ -448,6 +451,9 @@ class VyfakturujAPI
     private function curlInjectCaCerts($curl)
     {
         if (class_exists('\Composer\CaBundle\CaBundle')) {
+            /** @noinspection PhpUndefinedNamespaceInspection */
+            /** @noinspection PhpFullyQualifiedNameUsageInspection */
+            /** @noinspection PhpUndefinedClassInspection */
             $caPathOrFile = \Composer\CaBundle\CaBundle::getSystemCaRootBundlePath();
             if (is_dir($caPathOrFile) || (is_link($caPathOrFile) && is_dir(readlink($caPathOrFile)))) {
                 curl_setopt($curl, CURLOPT_CAPATH, $caPathOrFile);
