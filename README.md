@@ -34,7 +34,7 @@ $invoice = $vyfakturuj->getInvoice(1234567);
 
 ## Požadavky
 Knihovna pro správné fungování potřebuje:
-- PHP verze 5.3 a vyšší
+- PHP verze 5.6 a vyšší
 - Rozšíření cURL
 - Rozšíření JSON
 
