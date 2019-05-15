@@ -369,12 +369,10 @@ class VyfakturujAPI
         if (array_key_exists('content', $result)) {
             ob_end_clean();
             $content = base64_decode($result['content']);
-            header('Cache-Control: public');
             $filename = $result['filename'];
-            header('Content-Description: File Transfer');
-            header('Content-Disposition: attachment; filename="' . $filename . '.pdf"');
-            header('Content-type: application/pdf');
-            header('Content-Transfer-Encoding: binary');
+            header('Cache-Control: public');
+            header('Content-Disposition: attachment; filename="' . rawurlencode($filename) . '.pdf"');
+            header('Content-Type: application/pdf');
             header('Content-Length: ' . strlen($content));
             echo $content;
             exit;
