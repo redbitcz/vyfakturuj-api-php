@@ -1,0 +1,6 @@
+.gitattributes export-ignore
+.gitignore export-ignore
+simple-autoload.php export-ignore
+README.md export-ignore
+manual-installation.md export-ignore
+examples/ export-ignore
