@@ -3,11 +3,9 @@
 /*
  * Interní nastavení nezbytné pro běh příkladů
  */
+
 require_once __DIR__ . '/../simple-autoload.php';
-require_once __DIR__ . '/assets/example-layout.php';
-if (!defined('JSON_PRETTY_PRINT')) {
-    define('JSON_PRETTY_PRINT', 128); // PHP 5.3 compatibility
-}
+require_once __DIR__ . '/assets/example-loader.php';
 
 /* ================================================================
  * Nastavení Vyfakturuj API - níže prosím vyplňte váš e-mail a klíč
