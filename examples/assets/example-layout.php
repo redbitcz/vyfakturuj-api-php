@@ -69,8 +69,8 @@ set_exception_handler(function ($e) use ($web) {
         </div>
     <?php
     else:
-        // Use system handler
-        return false;
+        $message = sprintf('%s na řádku %d v souboru: %s', $e->getMessage(), $e->getLine(), $e->getFile());
+        trigger_error($message, E_USER_ERROR);
     endif;
 });
 
