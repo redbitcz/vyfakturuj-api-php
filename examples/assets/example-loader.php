@@ -7,6 +7,16 @@
  * @author Ing. Martin Dostál
  */
 
+// Search optional composer if is package used as literally project - needed for apply ca-bundle package
+if (file_exists(__DIR__ . '/../../vendor/autoload.php')) {
+    require_once __DIR__ . '/../../vendor/autoload.php';
+}
+
+// PHP 5.3 compatibility
+if (!defined('JSON_PRETTY_PRINT')) {
+    define('JSON_PRETTY_PRINT', 128);
+}
+
 
 /**
  * Tento soubor není pro běh API důležitý, pouze pomáhá zlepšit přehlednost ukázek
