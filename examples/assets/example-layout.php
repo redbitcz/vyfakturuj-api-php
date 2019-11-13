@@ -97,17 +97,18 @@ set_error_handler(function ($errno, $errstr, $errfile, $errline) use ($web) {
             $name = 'Upozornění (strict)';
     }
 
-    if ($web) :
-        ?>
-
-            <div class="alert alert-<?= $style ;?>" role="alert">
-                <strong><?= sprintf('%s:', $name); ?></strong>
-                <code style="display:block;white-space: pre-wrap"><?= $errstr; ?></code>
-                <small><?= sprintf('na řádku %d v souboru: <code>%s</code>', $errline, $errfile); ?></small>
-            </div>
-        <?php
-    else:
+    if ($web === false) {
         // Use system handler
         return false;
-    endif;
+    }
+
+    ?>
+        <div class="alert alert-<?= $style ;?>" role="alert">
+            <strong><?= sprintf('%s:', $name); ?></strong>
+            <code style="display:block;white-space: pre-wrap"><?= $errstr; ?></code>
+            <small><?= sprintf('na řádku %d v souboru: <code>%s</code>', $errline, $errfile); ?></small>
+        </div>
+    <?php
+
+    return true;
 });
