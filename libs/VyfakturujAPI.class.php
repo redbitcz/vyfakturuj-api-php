@@ -509,4 +509,28 @@ class VyfakturujAPI
         return $this->fetchRequest($path, self::HTTP_METHOD_DELETE, $data);
     }
 
+    /**
+     * @return string
+     */
+    public function getEndpointUrl()
+    {
+        return $this->endpointUrl;
+    }
+
+    /**
+     * @param string $endpointUrl
+     * @throws VyfakturujAPIException
+     */
+    public function setEndpointUrl($endpointUrl)
+    {
+        if(preg_match('~https?://~i', $endpointUrl) !== 1) {
+            throw new VyfakturujAPIException(sprintf(
+                'Endpoint URL must be a valid absolute URL on HTTP(S) protocol, \'%s\' is not valid absolute URL',
+                $endpointUrl
+            ));
+        }
+
+        $this->endpointUrl = $endpointUrl;
+    }
+
 }
