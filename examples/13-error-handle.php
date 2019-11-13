@@ -3,15 +3,6 @@
 require_once __DIR__ . '/00-config.php';
 
 
-
-// Pomocná třída pro ukázku, která je záměrně poškozená, aby selhala
-class VyfakturujBrokenAPI extends VyfakturujAPI
-{
-    protected $endpointUrl = 'https://invalid.domain.vyfakturuj.cz/2.0/';
-}
-
-
-
 /*
  * Níže je ukázka, která je stejná jako v souboru 01-test.php, nicméně je záměrně poškozena, aby skončila chybou.
  * V příkladu je simulována situace, kdy se nepodaří připojení na API, například z důvodu vypadku internetu.
@@ -24,7 +15,11 @@ try {
     // Ukázka stejná, jako v příkladu 01-test.php
     echo "<h2>Ošetření chyb</h2>\n";
 
-    $vyfakturuj_api = new VyfakturujBrokenAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
+    $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
+
+    // Úprava URL pro ukázku, která je záměrně poškozená, aby selhala
+    $vyfakturuj_api->setEndpointUrl('https://invalid.domain.vyfakturuj.cz/2.0/');
+
     $result = $vyfakturuj_api->test();
 
     echo '<pre><code class="json">' . json_encode($result, JSON_PRETTY_PRINT) . '</code></pre>';
