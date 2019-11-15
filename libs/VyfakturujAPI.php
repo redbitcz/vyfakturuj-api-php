@@ -305,6 +305,45 @@ class VyfakturujAPI
     }
 
 
+     /**
+     * Vytvoření nového produktu
+     *
+     * @param array $data Data, která chceme použít při vytvoření.
+     * @return array Vrátí kompletní informace o dokumentu
+     * @throws VyfakturujAPIException
+     */
+    public function createProduct($data)
+    {
+        return $this->fetchPost('product/', $data);
+    }
+    
+     /**
+     * Úprava již vytvořeného produktu
+     *
+     * @param int $id ID produktu
+     * @param array $data Data, která chceme upravit
+     * @return array Vrátí kompletní informace o produktu
+     * @throws VyfakturujAPIException
+     */
+    public function updateProduct($id, $data)
+    {
+        return $this->fetchPut('product/' . $id . '/', $data);
+    }
+    
+    
+     /**
+     * Vratí informace o produktu
+     *
+     * @param int $id ID kontaktu
+     * @return array Vrátí kompletní informace o kontaktu
+     * @throws VyfakturujAPIException
+     */
+    public function getProduct($id)
+    {
+        return $this->fetchGet('product/' . $id . '/');
+    }
+    
+    
     /**
      * Vrátí seznam všech produktu
      *
