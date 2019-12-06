@@ -4,3 +4,4 @@ simple-autoload.php export-ignore
 README.md export-ignore
 manual-installation.md export-ignore
 examples/ export-ignore
+tools/ export-ignore
