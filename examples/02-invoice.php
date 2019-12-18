@@ -35,7 +35,7 @@ $opt = array(
     'customer_street' => 'Pouliční 79/C',
     'customer_city' => 'Praha',
     'customer_zip' => '10300',
-    'customer_country' => 'Česká republika',
+    'customer_country_code' => 'CZ',
     'currency' => 'EUR',
     'items' => array(
         array(
