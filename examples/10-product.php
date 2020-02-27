@@ -20,9 +20,9 @@ echo "<h2>Vyhledání produktů</h2>\n";
 $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 
 $opt = array(
-    'name' => 'Testovací produkt '.date("YmdHis"),
+    'name' => 'Testovací produkt ' . date("YmdHis"),
     'type' => 9,
-    'title' => 'Testovací produkt '.date("YmdHis"),
+    'title' => 'Testovací produkt ' . date("YmdHis"),
     'price' => 0,
     'store' => 10,
     'form_billing_config' => array(
@@ -107,6 +107,8 @@ $opt = array(
             'id' => 'CjGxVj3v',
         ),
     ),
+    'form_html_code' => '<link href="https://mydomain.tld/style.css" type="text/css" rel="stylesheet">' .
+        '<script type="text/javascript" src="https://mydomain.tld/javascript.js"></script>',
     'X_1' => 123,
 );
 
@@ -114,10 +116,10 @@ $ret = $vyfakturuj_api->createProduct($opt);
 
 echo '<h5>Vytvořili jsme produkt:</h5>';
 //echo '<pre><code class="json">'.(var_export($ret,true)).'</code></pre>';
-echo '<pre><code class="json">' .htmlspecialchars(json_encode($ret, JSON_PRETTY_PRINT)) . '</code></pre>';
+echo '<pre><code class="json">' . htmlspecialchars(json_encode($ret, JSON_PRETTY_PRINT)) . '</code></pre>';
 
 $opt = array(
-    'name' => 'Testovací produkt '.date("YmdHis").' UPRAVENO',
+    'name' => 'Testovací produkt ' . date("YmdHis") . ' UPRAVENO',
 );
 
 $ret = $vyfakturuj_api->updateProduct($ret['id'], $opt);
@@ -127,8 +129,7 @@ echo '<h5>Upravili jsme produkt:</h5>';
 echo '<pre><code class="json">' . htmlspecialchars(json_encode($ret, JSON_PRETTY_PRINT)) . '</code></pre>';
 
 
-
 $ret = $vyfakturuj_api->getProducts();
 
 echo '<h5>Načetli jsme tyto produkty:</h5>';
-echo '<pre><code class="json">'.htmlspecialchars(json_encode($ret,JSON_PRETTY_PRINT)).'</code></pre>';
+echo '<pre><code class="json">' . htmlspecialchars(json_encode($ret, JSON_PRETTY_PRINT)) . '</code></pre>';
