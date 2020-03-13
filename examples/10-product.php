@@ -25,12 +25,19 @@ $opt = array(
     'title' => 'Testovací produkt ' . date("YmdHis"),
     'price' => 0,
     'store' => 10,
+    'amount_type' => 1, // "1" => ✔ Zobrazit políčko pro zadání množství | "2" => ⛒ Schovat políčko pro zadání množství
+    'coupon_type' => 1, // "2" => ⛒ Skryto - políčko se nezobrazuje. Slevové kupóny nelze uplatnit. | "1" => ✔ Zobrazeno - zákazníci mohou uplatnit slevové kupóny.
+    'amountType' => 1, // 1 => ✔ Zobrazit políčko pro zadání množství | 2 => ⛒ Schovat políčko pro zadání množství
+    'form_text_header_main' => '', // Hlavní nadpis
+    'form_text_header_payment_method' => '', // Nadpis pro výběr platební metody
+    'form_text_header_billing' => '', // Nadpis pro zadání fakturačních údajů
+    'form_text_button_send' => '', // Tlačítko pro odeslání formuláře
     'form_billing_config' => array(
         '7H6kZZPx' => array(
             'name' => '',
             'type' => '-email-',
             'grid' => '1',
-            'required' => 4,
+            'required' => 4, // "2" => ⛒ Skryto - políčko se nezobrazuje | "1" => ✔ Zobrazeno - může i nemusí být vyplněno | "9" => ✔ Zobrazeno - může i nemusí být vyplněno + skrýt, pokud je částka na 0 | "4" => ✱ Povinné - musí být vyplněno | "12 => >✱ Povinné - musí být vyplněno + skrýt, pokud je částka na 0
             'id' => '7H6kZZPx',
         ),
         'Wqizeafd' => array(
@@ -89,7 +96,7 @@ $opt = array(
             'name' => '',
             'type' => '-firstname-',
             'grid' => '1',
-            'required' => 4,
+            'required' => 4, // "2" => ⛒ Skryto - políčko se nezobrazuje | "1" => ✔ Zobrazeno - může i nemusí být vyplněno | "9" => ✔ Zobrazeno - může i nemusí být vyplněno + skrýt, pokud je částka na 0 | "4" => selected="">✱ Povinné - musí být vyplněno
             'id' => '2kENDqlc',
         ),
         'liQglxaL' => array(
@@ -107,6 +114,14 @@ $opt = array(
             'id' => 'CjGxVj3v',
         ),
     ),
+    'url_product' => 'http://www.google.com', // URL po uhrazení
+    'sentence' => [
+        [
+            'type' => 2, // "1" => Text | "2" => selected="">Checkbox | "4" => Povinný checkbox | "8" => Obchodní podmínky
+            'text' => 'Objednávkou souhlasíte s obchodními podmínkami, kde je i vše k osobním údajům',
+            'url' => ' https://elegal.cz/obchodni-podminky-skoleni-elegal',
+        ],
+    ],
     'form_html_code' => '<link href="https://mydomain.tld/style.css" type="text/css" rel="stylesheet">' .
         '<script type="text/javascript" src="https://mydomain.tld/javascript.js"></script>',
     'X_1' => 123,
