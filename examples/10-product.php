@@ -32,6 +32,7 @@ $opt = array(
     'form_text_header_payment_method' => '', // Nadpis pro výběr platební metody
     'form_text_header_billing' => '', // Nadpis pro zadání fakturačních údajů
     'form_text_button_send' => '', // Tlačítko pro odeslání formuláře
+    'form_text_button_add_person' => '', // Tlačítko pro přidání dalšího účastníka
     'form_billing_config' => array(
         '7H6kZZPx' => array(
             'name' => '',
@@ -115,6 +116,7 @@ $opt = array(
         ),
     ),
     'url_product' => 'http://www.google.com', // URL po uhrazení
+    'url_thank_you' => 'http://www.google.com', // URL po objednani
     'sentence' => [
         [
             'type' => 2, // "1" => Text | "2" => selected="">Checkbox | "4" => Povinný checkbox | "8" => Obchodní podmínky
