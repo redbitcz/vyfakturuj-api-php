@@ -35,11 +35,16 @@ class VyfakturujAPI
     /**
      * @param string $login
      * @param string $apiHash
+     * @param string|null $endpointUrl
+     * @throws VyfakturujAPIException
      */
-    public function __construct($login, $apiHash)
+    public function __construct($login, $apiHash, $endpointUrl = null)
     {
         $this->login = $login;
         $this->apiHash = $apiHash;
+        if($endpointUrl !== null) {
+            $this->setEndpointUrl($endpointUrl);
+        }
     }
 
 
