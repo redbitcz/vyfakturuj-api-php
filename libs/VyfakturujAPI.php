@@ -112,7 +112,7 @@ class VyfakturujAPI
     public function invoice_sendMail_test($id, $data)
     {
         $data['test'] = true;
-        return $this->fetchPost('invoice/' . $id . '/send-mail/', $data);
+        return $this->invoice_sendMail($id, $data);
     }
 
 
@@ -126,7 +126,7 @@ class VyfakturujAPI
      */
     public function invoice_sendMail($id, $data)
     {
-        return $this->fetchPost('invoice/' . $id . '/send-mail/', $data);
+        return $this->fetchPost('invoice/' . $id . '/do/send-mail/', $data);
     }
 
 
@@ -139,7 +139,7 @@ class VyfakturujAPI
      */
     public function invoice_sendEet($id)
     {
-        return $this->fetchPost('invoice/' . $id . '/send-eet/');
+        return $this->fetchPost('invoice/' . $id . '/do/send-eet/');
     }
 
 
@@ -161,7 +161,7 @@ class VyfakturujAPI
         if ($amount !== null) {
             $data['amount'] = $amount;
         }
-        return $this->fetchPost('invoice/' . $id . '/payment/', $data);
+        return $this->fetchPost('invoice/' . $id . '/do/pay/', $data);
     }
 
 
