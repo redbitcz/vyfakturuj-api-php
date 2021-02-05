@@ -1,12 +1,10 @@
 <?php
 /**
- * @package Redbit\Vyfakturuj\VyfakturujAPI
+ * @package Redbitcz\Vyfakturuj\VyfakturujAPI
  * @license MIT
- * @copyright 2016-2018 Redbit s.r.o.
+ * @copyright 2016-2021 Redbit s.r.o.
  * @author Redbit s.r.o. <info@vyfakturuj.cz>
- * @author Ing. Martin Dostál
  */
-
 
 /**
  * Definice pomocných konstant

@@ -1,17 +1,11 @@
 <?php
 /**
- * @package Redbit\Vyfakturuj\VyfakturujAPI
+ * @package Redbitcz\Vyfakturuj\VyfakturujAPI
  * @license MIT
- * @copyright 2016-2018 Redbit s.r.o.
+ * @copyright 2016-2021 Redbit s.r.o.
  * @author Redbit s.r.o. <info@vyfakturuj.cz>
- * @author Ing. Martin Dostál
  */
 
-
-
-/**
- * Třída pro práci s API Vyfakturuj.cz
- */
 class VyfakturujAPI
 {
     // HTTP methods
@@ -42,11 +36,10 @@ class VyfakturujAPI
     {
         $this->login = $login;
         $this->apiHash = $apiHash;
-        if($endpointUrl !== null) {
+        if ($endpointUrl !== null) {
             $this->setEndpointUrl($endpointUrl);
         }
     }
-
 
     /**
      * Vytvoření nového dokumentu
@@ -59,7 +52,6 @@ class VyfakturujAPI
     {
         return $this->fetchPost('invoice/', $data);
     }
-
 
     /**
      * Úprava již vytvořeného dokumentu
@@ -74,7 +66,6 @@ class VyfakturujAPI
         return $this->fetchPut('invoice/' . $id . '/', $data);
     }
 
-
     /**
      * Vratí informace o dokladu
      *
@@ -87,7 +78,6 @@ class VyfakturujAPI
         return $this->fetchGet('invoice/' . $id . '/');
     }
 
-
     /**
      * Vrátí seznam všech faktur
      *
@@ -99,7 +89,6 @@ class VyfakturujAPI
     {
         return $this->fetchGet('invoice/?' . http_build_query($args));
     }
-
 
     /**
      * Vrati šablonu e-mailu, který by se odeslal zákazníkovi.
@@ -115,7 +104,6 @@ class VyfakturujAPI
         return $this->invoice_sendMail($id, $data);
     }
 
-
     /**
      * Odešle e-mail podle zadaných dat
      *
@@ -129,7 +117,6 @@ class VyfakturujAPI
         return $this->fetchPost('invoice/' . $id . '/do/send-mail/', $data);
     }
 
-
     /**
      * Odesle dokument do EET
      *
@@ -141,7 +128,6 @@ class VyfakturujAPI
     {
         return $this->fetchPost('invoice/' . $id . '/do/send-eet/');
     }
-
 
     /**
      * Uhradí fakturu
@@ -164,7 +150,6 @@ class VyfakturujAPI
         return $this->fetchPost('invoice/' . $id . '/do/pay/', $data);
     }
 
-
     /**
      * Smazání faktury
      *
@@ -177,7 +162,6 @@ class VyfakturujAPI
         return $this->fetchDelete('invoice/' . $id . '/');
     }
 
-
     /**
      * Vytvoření nového kontaktu v adresáři
      *
@@ -189,7 +173,6 @@ class VyfakturujAPI
     {
         return $this->fetchPost('contact/', $data);
     }
-
 
     /**
      * Úprava již vytvořeného kontaktu
@@ -204,7 +187,6 @@ class VyfakturujAPI
         return $this->fetchPut('contact/' . $id . '/', $data);
     }
 
-
     /**
      * Vratí informace o kontaktu
      *
@@ -216,7 +198,6 @@ class VyfakturujAPI
     {
         return $this->fetchGet('contact/' . $id . '/');
     }
-
 
     /**
      * Vrátí seznam kontaktů
@@ -230,7 +211,6 @@ class VyfakturujAPI
         return $this->fetchGet('contact/?' . http_build_query($args));
     }
 
-
     /**
      * Smazání kontaktu v adresáři
      *
@@ -243,7 +223,6 @@ class VyfakturujAPI
         return $this->fetchDelete('contact/' . $id . '/');
     }
 
-
     /**
      * Vytvoření nové šablony|pravidelné faktury
      *
@@ -255,7 +234,6 @@ class VyfakturujAPI
     {
         return $this->fetchPost('template/', $data);
     }
-
 
     /**
      * Úprava již vytvořené šablony|pravidelné faktury
@@ -270,7 +248,6 @@ class VyfakturujAPI
         return $this->fetchPut('template/' . $id . '/', $data);
     }
 
-
     /**
      * Vratí informace o šabloně|pravidelné faktuře
      *
@@ -282,7 +259,6 @@ class VyfakturujAPI
     {
         return $this->fetchGet('template/' . $id . '/');
     }
-
 
     /**
      * Vrátí seznam všech šablon|pravidelných faktur
@@ -296,7 +272,6 @@ class VyfakturujAPI
         return $this->fetchGet('template/?' . http_build_query($args));
     }
 
-
     /**
      * Smazání šablony|pravidelné faktury
      *
@@ -308,7 +283,6 @@ class VyfakturujAPI
     {
         return $this->fetchDelete('template/' . $id . '/');
     }
-
 
     /**
      * Vrátí seznam všech produktu
@@ -322,7 +296,6 @@ class VyfakturujAPI
         return $this->fetchGet('product/?' . http_build_query($args));
     }
 
-
     /**
      * Vrati seznam platebních metod
      *
@@ -333,7 +306,6 @@ class VyfakturujAPI
     {
         return $this->fetchGet('settings/payment-method/');
     }
-
 
     /**
      * Vrati seznam číselných řad
@@ -346,7 +318,6 @@ class VyfakturujAPI
         return $this->fetchGet('settings/number-series/');
     }
 
-
     /**
      * Testovací funkce pro ověření správného spojení se serverem
      *
@@ -357,7 +328,6 @@ class VyfakturujAPI
     {
         return $this->fetchGet('test/');
     }
-
 
     /**
      * Test faktury v PDF.
@@ -385,7 +355,6 @@ class VyfakturujAPI
         return $result;
     }
 
-
     /**
      * Vrati informace o poslednim spojeni
      *
@@ -395,7 +364,6 @@ class VyfakturujAPI
     {
         return $this->lastInfo;
     }
-
 
     /**
      * @param $path
@@ -447,7 +415,6 @@ class VyfakturujAPI
         return is_array($return) ? $return : $response;
     }
 
-
     /**
      * @param resource $curl cURL handle
      */
@@ -466,7 +433,6 @@ class VyfakturujAPI
         }
     }
 
-
     /**
      * @param $path
      * @param array|null $data
@@ -477,7 +443,6 @@ class VyfakturujAPI
     {
         return $this->fetchRequest($path, self::HTTP_METHOD_GET, $data);
     }
-
 
     /**
      * @param $path
@@ -490,7 +455,6 @@ class VyfakturujAPI
         return $this->fetchRequest($path, self::HTTP_METHOD_POST, $data);
     }
 
-
     /**
      * @param $path
      * @param array|null $data
@@ -501,7 +465,6 @@ class VyfakturujAPI
     {
         return $this->fetchRequest($path, self::HTTP_METHOD_PUT, $data);
     }
-
 
     /**
      * @param $path
@@ -528,14 +491,15 @@ class VyfakturujAPI
      */
     public function setEndpointUrl($endpointUrl)
     {
-        if(preg_match('~https?://~i', $endpointUrl) !== 1) {
-            throw new VyfakturujAPIException(sprintf(
-                'Endpoint URL must be a valid absolute URL on HTTP(S) protocol, \'%s\' is not valid absolute URL',
-                $endpointUrl
-            ));
+        if (preg_match('~https?://~i', $endpointUrl) !== 1) {
+            throw new VyfakturujAPIException(
+                sprintf(
+                    'Endpoint URL must be a valid absolute URL on HTTP(S) protocol, \'%s\' is not valid absolute URL',
+                    $endpointUrl
+                )
+            );
         }
 
         $this->endpointUrl = $endpointUrl;
     }
-
 }

@@ -1,13 +1,17 @@
 {
     "name": "vyfakturuj/vyfakturuj-api-php",
     "description": "Vyfakturuj API",
-    "keywords": ["vyfakturuj", "api", "faktura"],
+    "keywords": [
+        "vyfakturuj",
+        "api",
+        "faktura"
+    ],
     "homepage": "https://www.vyfakturuj.cz/api/",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-           "name": "Redbit s.r.o.",
+            "name": "Redbit s.r.o.",
             "homepage": "https://www.redbit.cz/"
         }
     ],
@@ -15,7 +19,9 @@
         "email": "info@vyfakturuj.cz"
     },
     "autoload": {
-        "classmap": ["libs/"]
+        "classmap": [
+            "libs/"
+        ]
     },
     "require": {
         "php": ">=5.6.0",

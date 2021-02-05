@@ -1,12 +1,25 @@
 <?php
+/**
+ * @package Redbitcz\Vyfakturuj\VyfakturujAPI
+ * @license MIT
+ * @copyright 2016-2021 Redbit s.r.o.
+ * @author Redbit s.r.o. <info@vyfakturuj.cz>
+ */
 
 require_once __DIR__ . '/../config.php';
 
 $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 
-$id = 12345; // ID šablony nebo pravidelné faktury
+/**
+ * Zadejte ID šablony nebo pravidelné faktury pro smazání
+ */
+$templateId = 12345;
 
-$ret = $vyfakturuj_api->deleteTemplate($id);
+$response = $vyfakturuj_api->deleteTemplate($templateId);
+?>
 
-echo '<h1>Načetli jsme data o průběhu smazání faktury ze systému:</h1>';
-echo '<pre><code class="json">' . json_encode($ret, JSON_PRETTY_PRINT) . '</code></pre>';
+<h2>Smazání šablony nebo pravidelné faktury</h2>
+
+<pre><code class="json">
+<?= htmlspecialchars(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)) ?>
+</code></pre>

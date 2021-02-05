@@ -1,28 +1,49 @@
 <?php
+/**
+ * @package Redbitcz\Vyfakturuj\VyfakturujAPI
+ * @license MIT
+ * @copyright 2016-2021 Redbit s.r.o.
+ * @author Redbit s.r.o. <info@vyfakturuj.cz>
+ */
 
 require_once __DIR__ . '/../config.php';
 
 $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 
-$id = 12345; // ID pravidelné faktury
+/**
+ * Zadejte ID šablony nebo pravidelné faktury pro úpravu
+ */
+$templateId = 12345; // ID pravidelné faktury
 
-$opt = array(
-    'name' => '#API + Test pravidelné faktury',// změníme název
-    'items' => array(
-        array(
+/**
+ * Podklady pro úpravu  šablony nebo pravidelné faktury
+ *
+ * V příkladu měníme název šablony a seznam položek na faktuře nahrazujeme novým seznamem
+ *
+ * Popis všech dostupných parametrů najdete v dokumentaci:
+ * @link https://vyfakturujcz.docs.apiary.io/#reference/sablony,-pravidelne-faktury
+ */
+$params = [
+    'name' => '#API + Test pravidelné faktury',
+    'items' => [
+        [
             'text' => 'Stěrač na ponorku',
             'unit_price' => 990.25,
-            'vat_rate' => 21,// změníme DPH
-        ),
-        array(
+            'vat_rate' => 21,
+        ],
+        [
             'text' => 'Kapalina do ostřikovačů 250 ml',
             'unit_price' => 59,
-            'vat_rate' => 21,// změníme DPH
-        )
-    )
-);
+            'vat_rate' => 21,
+        ]
+    ]
+];
 
-$ret2 = $vyfakturuj_api->updateTemplate($id, $opt);    // upravíme zaznam
+$template = $vyfakturuj_api->updateTemplate($templateId, $params);
+?>
 
-echo '<h1>Upravili jsme pravidelnou fakturu:</h1>';
-echo '<pre><code class="json">' . json_encode($ret2, JSON_PRETTY_PRINT) . '</code></pre>';
+<h2>Editace šablony nebo pravidelné faktury</h2>
+
+<pre><code class="json">
+<?= htmlspecialchars(json_encode($template, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)) ?>
+</code></pre>

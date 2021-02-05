@@ -11,14 +11,18 @@ require_once __DIR__ . '/../config.php';
 $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 
 /**
- * Zadejte ID faktury pro smazání
+ * Zadejte ID kontaktu pro zobrazení
  */
-$invoiceId = 12345;
+$contactId = 12345;
 
-$response = $vyfakturuj_api->deleteInvoice($invoiceId);
+$updateData = [
+    'name' => '#API - Ukázkový kontakt - po úpravě',
+];
+
+$response = $vyfakturuj_api->updateContact($contactId, $updateData);
 ?>
 
-<h2>Smazání faktury</h2>
+<h2>Editace kontaktu</h2>
 
 <pre><code class="json">
 <?= htmlspecialchars(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)) ?>
