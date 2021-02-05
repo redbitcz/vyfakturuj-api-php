@@ -1,12 +1,25 @@
 <?php
+/**
+ * @package Redbitcz\Vyfakturuj\VyfakturujAPI
+ * @license MIT
+ * @copyright 2016-2021 Redbit s.r.o.
+ * @author Redbit s.r.o. <info@vyfakturuj.cz>
+ */
 
 require_once __DIR__ . '/../config.php';
 
 $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 
-$id = 12345; // ID dokumentu
+/**
+ * Zadejte ID faktury pro zobrazení
+ */
+$invoiceId = 12345;
 
-$inv3 = $vyfakturuj_api->getInvoice($id);
+$invoice = $vyfakturuj_api->getInvoice($invoiceId);
+?>
 
-echo '<h1>Načetli jsme data o faktuře ze systému:</h1>';
-echo '<pre><code class="json">' . json_encode($inv3, JSON_PRETTY_PRINT) . '</code></pre>';
+<h2>Načtení faktury</h2>
+
+<pre><code class="json">
+<?= htmlspecialchars(json_encode($invoice, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)) ?>
+</code></pre>

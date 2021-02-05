@@ -1,16 +1,26 @@
 <?php
+/**
+ * @package Redbitcz\Vyfakturuj\VyfakturujAPI
+ * @license MIT
+ * @copyright 2016-2021 Redbit s.r.o.
+ * @author Redbit s.r.o. <info@vyfakturuj.cz>
+ */
 
 require_once __DIR__ . '/../config.php';
 
 $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 
-/*
- * Některá čísla v příkladu níže jsou číselná označení systémových typů.
+/**
+ * Podklady pro vytvoření faktury
+ *
+ * Některá čísla v příkladu jsou číselná označení systémových typů.
  * Například: 'type' => 1 znamená, že vytvořený doklad bude Faktura a nikoliv třeba Výzva k platbě.
- * Popis všech hodnot najdete v dokumentaci: https://vyfakturujcz.docs.apiary.io/#reference/faktury
- * Zkušenější uživatelé mohou použít výčet možných hodnot v přiložené třídě VyfakturujEnum.
+ * Popis všech dostupných parametrů najdete v dokumentaci:
+ * @link https://vyfakturujcz.docs.apiary.io/#reference/faktury
+ * Zkušenější uživatelé mohou použít výčet možných hodnot v přiložené třídě VyfakturujEnum, například:.
+ * 'type' => VyfakturujEnum::DOCUMENT_TYPE_FAKTURA
  */
-$opt = array(
+$params = [
     'type' => 1,
     'calculate_vat' => 2,
     'payment_method' => 2,
@@ -22,27 +32,31 @@ $opt = array(
     'customer_zip' => '10300',
     'customer_country_code' => 'CZ',
     'currency' => 'EUR',
-    'items' => array(
-        array(
+    'items' => [
+        [
             'text' => 'Stěrač na ponorku',
             'unit_price' => 990.25,
             'vat_rate' => 15,
-        ),
-        array(
+        ],
+        [
             'text' => 'Kapalina do ostřikovačů 250 ml',
             'unit_price' => 59,
             'vat_rate' => 15,
-        ),
-        array(
+        ],
+        [
             'text' => 'Doprava',
             'unit_price' => 0,
             'vat_rate' => 0,
-        )
-    ),
+        ]
+    ],
     'action_after_create_send_to_eet' => true
-);
+];
 
-$inv = $vyfakturuj_api->createInvoice($opt);    // vytvoříme novou fakturu
+$invoice = $vyfakturuj_api->createInvoice($params);
+?>
 
-echo '<h1>Vytvořili jsme fakturu:</h1>';
-echo '<pre><code class="json">' . json_encode($inv, JSON_PRETTY_PRINT) . '</code></pre>';
+<h2>Vytvoření faktury</h2>
+
+<pre><code class="json">
+<?= htmlspecialchars(json_encode($invoice, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)) ?>
+</code></pre>

@@ -1,34 +1,50 @@
 <?php
+/**
+ * @package Redbitcz\Vyfakturuj\VyfakturujAPI
+ * @license MIT
+ * @copyright 2016-2021 Redbit s.r.o.
+ * @author Redbit s.r.o. <info@vyfakturuj.cz>
+ */
 
 require_once __DIR__ . '/../config.php';
 
 $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 
-/*
- * Některá čísla v příkladu níže jsou číselná označení systémových typů.
- * Například: 'type' => 2 znamená, že vytváříme Pravidelnou fakturu, nikoliv jen Šablonu.
- * Popis všech hodnot najdete v dokumentaci: https://vyfakturujcz.docs.apiary.io/#reference/sablony,-pravidelne-faktury
- * Zkušenější uživatelé mohou použít výčet možných hodnot v přiložené třídě VyfakturujEnum.
+/**
+ * Podklady pro vytvoření šablony nebo pravidelné faktury
+ *
+ * Některá čísla v příkladu jsou číselná označení systémových typů.
+ * Například: 'type' => 1 znamená, že vytvořený objekt bude Šablona a nikoliv Pravidelná faktura.
+ *
+ * Popis všech dostupných parametrů najdete v dokumentaci:
+ * @link https://vyfakturujcz.docs.apiary.io/#reference/sablony,-pravidelne-faktury
+ *
+ * Zkušenější uživatelé mohou použít výčet možných hodnot v přiložené třídě VyfakturujEnum, například:.
+ * 'type' => VyfakturujEnum::TEMPLATE_TYPE_TEMPLATE
  */
-$opt_template = array(
-    'id_customer' => 123,// ID existujícího kontaktu
-    'type' => 2,// Jedná se o pravidelnou fakturu, nikoliv o šablonu
+$params = [
+    'id_customer' => 123,
+    'type' => 2,
     'name' => '#API - Test pravidelné faktury',
-    'items' => array(
-        array(
+    'items' => [
+        [
             'text' => 'Stěrač na ponorku',
             'unit_price' => 990.25,
             'vat_rate' => 15,
-        ),
-        array(
+        ],
+        [
             'text' => 'Kapalina do ostřikovačů 250 ml',
             'unit_price' => 59,
             'vat_rate' => 15,
-        )
-    )
-);
+        ]
+    ]
+];
 
-$ret = $vyfakturuj_api->createTemplate($opt_template);    // vytvoříme novou pravidelnou fakturu
+$template = $vyfakturuj_api->createTemplate($params);
+?>
 
-echo '<h1>Vytvořili jsme pravidelnou fakturu:</h1>';
-echo '<pre><code class="json">' . json_encode($ret, JSON_PRETTY_PRINT) . '</code></pre>';
+<h2>Vytvoření šablony nebo pravidelné faktury</h2>
+
+<pre><code class="json">
+<?= htmlspecialchars(json_encode($template, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)) ?>
+</code></pre>

@@ -1,11 +1,22 @@
 <?php
+/**
+ * @package Redbitcz\Vyfakturuj\VyfakturujAPI
+ * @license MIT
+ * @copyright 2016-2021 Redbit s.r.o.
+ * @author Redbit s.r.o. <info@vyfakturuj.cz>
+ */
 
 require_once __DIR__ . '/../config.php';
 
 $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 
-
-$customer = array(
+/**
+ * Informace o odběrateli (kontaktu), který bude použit ve faktuře
+ *
+ * Seznam dostupných parametrů je popsán v dokumentaci:
+ * @link https://vyfakturujcz.docs.apiary.io/#reference/adresar
+ */
+$contactParams = [
     'IC' => '123456789',
     'name' => '#API - Ukázkový kontakt',
     'note' => 'Kontakt vytvořený přes API',
@@ -15,56 +26,72 @@ $customer = array(
     'zip' => '10300',
     'delivery_country_code' => 'CZ',
     'mail_to' => 'info@examle.com',
-);
-
-$searchCustomer = [
-    'IC' => $customer['IC'],
 ];
 
-// Pokusíme se najít zákazníka v našem adresáři
-$ret = $vyfakturuj_api->getContacts($searchCustomer);
+/** Z odběratele si vytáhneme IČ, které použijeme pro jeho dohledání v kontaktech */
+$contactSearch = [
+    'IC' => $contactParams['IC'],
+];
 
-if(count($ret) > 0){ // Zákazník nalezen
-    $id_customer = $ret[0]['id'];
-}else{ // Zákazník v adresáři nenalezen. Vytvořím ho.
-    $ret = $vyfakturuj_api->createContact($customer);
-    $id_customer = $ret['id'];
+$contacts = $vyfakturuj_api->getContacts($contactSearch);
+
+if (count($contacts) > 0) {
+    // Kontakt BYL v systému byl nalezen, získáme jeho ID
+    $contactId = $contacts[0]['id'];
+} else {
+    // Kontakt NEBYL v systému byl nalezen, tak jej vytvoříme a po vytvoření získáme jeho ID
+    $contacts = $vyfakturuj_api->createContact($contactParams);
+    $contactId = $contacts['id'];
 }
 
-
-$invoice = array(
+/**
+ * Podklady pro vytvoření faktury
+ *
+ * Některá čísla v příkladu jsou číselná označení systémových typů.
+ * Například: 'type' => 1 znamená, že vytvořený doklad bude Faktura a nikoliv třeba Výzva k platbě.
+ * Popis všech hodnot najdete v dokumentaci:
+ * @link https://vyfakturujcz.docs.apiary.io/#reference/faktury
+ * Zkušenější uživatelé mohou použít výčet možných hodnot v přiložené třídě VyfakturujEnum, například:.
+ * 'type' => VyfakturujEnum::DOCUMENT_TYPE_FAKTURA
+ */
+$invoiceParams = [
     'type' => 1,
-    'id_customer' => $id_customer, // <-- Přidáme vazbu na adresář.
+    'id_customer' => $contactId, // <-- Přidáme vazbu na kontakt z adresáře jako odběratele pro vytvořenou fakturu
     'calculate_vat' => 2,
     'payment_method' => 2,
-    'customer_IC' => $customer['IC'],
-    'customer_name' => $customer['name'],
-    'customer_street' => $customer['street'],
-    'customer_city' => $customer['city'],
-    'customer_zip' => $customer['zip'],
-    'customer_country_code' => $customer['delivery_country_code'],
+    'customer_IC' => $contactParams['IC'],
+    'customer_name' => $contactParams['name'],
+    'customer_street' => $contactParams['street'],
+    'customer_city' => $contactParams['city'],
+    'customer_zip' => $contactParams['zip'],
+    'customer_country_code' => $contactParams['delivery_country_code'],
     'currency' => 'EUR',
-    'items' => array(
-        array(
+    'items' => [
+        [
             'text' => 'Stěrač na ponorku',
             'unit_price' => 990.25,
             'vat_rate' => 15,
-        ),
-        array(
+        ],
+        [
             'text' => 'Kapalina do ostřikovačů 250 ml',
             'unit_price' => 59,
             'vat_rate' => 15,
-        ),
-        array(
+        ],
+        [
             'text' => 'Doprava',
             'unit_price' => 0,
             'vat_rate' => 0,
-        )
-    ),
+        ]
+    ],
     'action_after_create_send_to_eet' => true
-);
+];
 
-$inv = $vyfakturuj_api->createInvoice($invoice);    // vytvoříme novou fakturu
+$invoice = $vyfakturuj_api->createInvoice($invoiceParams);
+?>
 
-echo '<h1>Vytvořili jsme fakturu:</h1>';
-echo '<pre><code class="json">' . json_encode($inv, JSON_PRETTY_PRINT) . '</code></pre>';
+<h2>Vytvoření faktury s napojením na kontakt</h2>
+
+<pre><code class="json">
+<?= htmlspecialchars(json_encode($invoice, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)) ?>
+</code></pre>
+
