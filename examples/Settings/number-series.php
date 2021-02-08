@@ -1,10 +1,20 @@
 <?php
+/**
+ * @package Redbitcz\Vyfakturuj\VyfakturujAPI
+ * @license MIT
+ * @copyright 2016-2021 Redbit s.r.o.
+ * @author Redbit s.r.o. <info@vyfakturuj.cz>
+ */
 
 require_once __DIR__ . '/../config.php';
 
 $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 
-$inv = $vyfakturuj_api->getSettings_numberSeries();
+$numberSeries = $vyfakturuj_api->getSettings_numberSeries();
+?>
 
-echo '<h1>Číselné řady</h1>';
-echo '<pre><code class="json">' . json_encode($inv, JSON_PRETTY_PRINT) . '</code></pre>';
+<h2>Vypsání seznamu číselných řad</h2>
+
+<pre><code class="json">
+<?= htmlspecialchars(json_encode($numberSeries, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)) ?>
+</code></pre>

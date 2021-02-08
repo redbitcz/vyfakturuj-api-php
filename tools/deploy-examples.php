@@ -1,10 +1,15 @@
 <?php
-/** @noinspection PhpLanguageLevelInspection */
-/** @noinspection UnNecessaryDoubleQuotesInspection */
-/** @noinspection ThrowRawExceptionInspection */
-/** @noinspection AutoloadingIssuesInspection */
-/** @noinspection PhpUnhandledExceptionInspection */
-/** @noinspection DuplicatedCode */
+
+/**
+ * @noinspection AutoloadingIssuesInspection
+ * @noinspection DuplicatedCode
+ * @noinspection PhpDocSignatureInspection
+ * @noinspection PhpLanguageLevelInspection
+ * @noinspection PhpUndefinedClassInspection
+ * @noinspection PhpUnhandledExceptionInspection
+ * @noinspection ThrowRawExceptionInspection
+ * @noinspection UnNecessaryDoubleQuotesInspection
+ */
 declare(strict_types=1);
 
 namespace Tools\Deploy\DeployToDev;
@@ -27,8 +32,12 @@ if (PHP_SAPI !== 'cli') {
 }
 // Parse & validate command arguments
 if ($argc !== 2) {
-    throw new Exception(sprintf('Usage: %s <version>',
-        basename(__FILE__)));
+    throw new Exception(
+        sprintf(
+            'Usage: %s <version>',
+            basename(__FILE__)
+        )
+    );
 }
 $version = $argv[1];
 
@@ -103,7 +112,7 @@ function joinPaths(string ...$paths)
 /**
  * Safe call of system CLI commands
  * @param string $command
- * @throws \Exception
+ * @throws Exception
  */
 function invokeSafe(string $command)
 {
@@ -111,6 +120,6 @@ function invokeSafe(string $command)
     system($command, $returnVal);
 
     if ($returnVal !== 0) {
-        throw new \Exception('Command failed: ' . $command);
+        throw new Exception('Command failed: ' . $command);
     }
 }

@@ -1,10 +1,20 @@
 <?php
+/**
+ * @package Redbitcz\Vyfakturuj\VyfakturujAPI
+ * @license MIT
+ * @copyright 2016-2021 Redbit s.r.o.
+ * @author Redbit s.r.o. <info@vyfakturuj.cz>
+ */
 
 require_once __DIR__ . '/../config.php';
 
 $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 
-$ret = $vyfakturuj_api->getTemplates(); // vrati vsechny sablony a pravidelné faktury
+$templates = $vyfakturuj_api->getTemplates();
+?>
 
-echo '<h1>Pravidelné faktury a šablony</h1>';
-echo '<pre><code class="json">' . json_encode($ret, JSON_PRETTY_PRINT) . '</code></pre>';
+<h2>Načtení šablon a pravidelných faktur</h2>
+
+<pre><code class="json">
+<?= htmlspecialchars(json_encode($templates, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)) ?>
+</code></pre>

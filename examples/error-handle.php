@@ -2,14 +2,12 @@
 
 require_once __DIR__ . '/config.php';
 
-
-/*
- * Níže je ukázka, která je stejná jako v souboru 01-test.php, nicméně je záměrně poškozena, aby skončila chybou.
+/**
+ * Ukázka, která je stejná jako v souboru test-connection.php, avšak je záměrně poškozena, aby skončila chybou.
  * V příkladu je simulována situace, kdy se nepodaří připojení na API, například z důvodu vypadku internetu.
  * Při takové chybě dojde k tomu, že kód v daném místě „umře“ a nepokračuje dál, což by mohlo rozbít vaši aplikaci.
  * Tím, že kód zabalíte do try {...} catch, umožníte chybu tzv. zachytit, ošetřit a pokračovat v aplikaci dál.
  */
-
 
 try {
     // Ukázka stejná, jako v příkladu 01-test.php
