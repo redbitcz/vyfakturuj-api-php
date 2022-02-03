@@ -11,6 +11,7 @@ require_once __DIR__ . '/config.php';
             <li><a href="Invoice/create-invoice.php">create-invoice.php</a></li>
             <li><a href="Invoice/create-invoice-with-customer-in-directory.php">create-invoice-with-customer-in-directory.php</a>
             </li>
+            <li><a href="Invoice/create-end-invoice.php">create-end-invoice.php</a></li>
             <li><a href="Invoice/delete-invoice.php">delete-invoice.php</a></li>
             <li><a href="Invoice/filter-invoices.php">filter-invoices.php</a></li>
             <li><a href="Invoice/read-invoice.php">read-invoice.php</a></li>
