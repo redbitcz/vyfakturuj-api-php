@@ -16,7 +16,31 @@ if (file_exists(__DIR__ . '/../../vendor/autoload.php')) {
 $web = PHP_SAPI !== 'cli';
 
 if ($web):
-    ?>
+    header('Content-Type: text/html; charset=UTF-8');
+    ob_start();
+endif;
+
+register_shutdown_function(
+    static function () use ($web) {
+        $getHeader = function($header) {
+            {
+                $header .= ':';
+                $len = strlen($header);
+                foreach (headers_list() as $item) {
+                    if (strncasecmp($item, $header, $len) === 0) {
+                        return ltrim(substr($item, $len));
+                    }
+                }
+                return null;
+            }
+        };
+
+        $isHtml = (bool)preg_match('#^text/html(?:;|$)#', (string) $getHeader('Content-Type'));
+
+        if ($web) :
+            $content = ob_get_clean();
+            if ($isHtml):
+                ?>
     <!doctype html>
     <html lang="en">
     <head>
@@ -47,25 +71,25 @@ if ($web):
     <div class="container">
     <h1 class="mt-5"><a href="https://www.vyfakturuj.cz/api/">VyfakturujAPI</a> příklady</h1>
     <div class="jumbotron mt-3">
-<?php
-endif;
+            <?php
+            endif;
 
-register_shutdown_function(
-    static function () use ($web) {
-        if ($web) :
+            echo $content;
+
+        if ($isHtml):
             ?>
 
             </div>
-            </div>
-            </body>
-            </html>
+        </div>
+    </body>
+</html>
         <?php
+        endif;
         else:
             echo PHP_EOL;
         endif;
     }
 );
-
 set_exception_handler(
     static function ($e) use ($web) {
         /**
@@ -76,9 +100,9 @@ set_exception_handler(
             ?>
 
             <div class="alert alert-danger" role="alert">
-                <strong><?= sprintf('Došlo k chybě #%d (%s):', $e->getCode(), get_class($e)); ?></strong>
-                <code style="display:block;white-space: pre-wrap"><?= $e->getMessage(); ?></code>
-                <small><?= sprintf('na řádku %d v souboru: <code>%s</code>', $e->getLine(), $e->getFile()); ?></small>
+                <strong><?= sprintf('Došlo k chybě #%d (%s):', $e->getCode(), get_class($e)) ?></strong>
+                <code style="display:block;white-space: pre-wrap"><?= $e->getMessage() ?></code>
+                <small><?= sprintf('na řádku %d v souboru: <code>%s</code>', $e->getLine(), $e->getFile()) ?></small>
             </div>
         <?php
         else:
