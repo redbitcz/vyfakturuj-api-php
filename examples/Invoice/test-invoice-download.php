@@ -47,7 +47,7 @@ $opt = [
             'unit_price' => 0,
             'vat_rate' => 0,
         ]
-    ]
+    ],
 ];
 $response = $vyfakturuj_api->test_invoice__asPdf($opt);
 ?>

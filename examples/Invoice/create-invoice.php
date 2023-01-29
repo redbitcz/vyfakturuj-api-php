@@ -23,7 +23,6 @@ $vyfakturuj_api = new VyfakturujAPI(VYFAKTURUJ_API_LOGIN, VYFAKTURUJ_API_KEY);
 $params = [
     'type' => 1,
     'calculate_vat' => 2,
-    'payment_method' => 2,
     'customer_IC' => '123456789',
     'customer_DIC' => 'CZ123456789',
     'customer_name' => 'Ukázková Firma',
@@ -49,7 +48,6 @@ $params = [
             'vat_rate' => 0,
         ]
     ],
-    'action_after_create_send_to_eet' => true
 ];
 
 $invoice = $vyfakturuj_api->createInvoice($params);

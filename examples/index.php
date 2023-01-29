@@ -16,7 +16,6 @@ require_once __DIR__ . '/config.php';
             <li><a href="Invoice/filter-invoices.php">filter-invoices.php</a></li>
             <li><a href="Invoice/read-invoice.php">read-invoice.php</a></li>
             <li><a href="Invoice/search-invoices.php">search-invoices.php</a></li>
-            <li><a href="Invoice/send-invoice-to-eet.php">send-invoice-to-eet.php</a></li>
             <li><a href="Invoice/send-email-with-invoice.php">send-email-with-invoice.php</a></li>
             <li><a href="Invoice/set-payment-to-invoice.php">set-payment-to-invoice.php</a></li>
             <li><a href="Invoice/test-invoice-download.php">test-invoice-download.php</a></li>
