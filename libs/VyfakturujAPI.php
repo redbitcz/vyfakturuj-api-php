@@ -118,18 +118,6 @@ class VyfakturujAPI
     }
 
     /**
-     * Odesle dokument do EET
-     *
-     * @param int $id
-     * @return array
-     * @throws VyfakturujAPIException
-     */
-    public function invoice_sendEet($id)
-    {
-        return $this->fetchPost('invoice/' . $id . '/do/send-eet/');
-    }
-
-    /**
      * Uhradí fakturu
      *
      * @param int $id id dokumentu
