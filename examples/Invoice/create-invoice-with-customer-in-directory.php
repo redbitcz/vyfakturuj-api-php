@@ -58,7 +58,7 @@ $invoiceParams = [
     'type' => 1,
     'id_customer' => $contactId, // <-- Přidáme vazbu na kontakt z adresáře jako odběratele pro vytvořenou fakturu
     'calculate_vat' => 2,
-    'payment_method' => 2,
+    'id_payment_method' => 123,
     'customer_IC' => $contactParams['IC'],
     'customer_name' => $contactParams['name'],
     'customer_street' => $contactParams['street'],
@@ -83,7 +83,6 @@ $invoiceParams = [
             'vat_rate' => 0,
         ]
     ],
-    'action_after_create_send_to_eet' => true
 ];
 
 $invoice = $vyfakturuj_api->createInvoice($invoiceParams);
@@ -94,4 +93,3 @@ $invoice = $vyfakturuj_api->createInvoice($invoiceParams);
 <pre><code class="json">
 <?= htmlspecialchars(json_encode($invoice, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)) ?>
 </code></pre>
-

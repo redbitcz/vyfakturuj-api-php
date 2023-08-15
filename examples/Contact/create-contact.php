@@ -24,7 +24,7 @@ $data = [
     'street' => 'Pouliční 79/C',
     'city' => 'Praha',
     'zip' => '10300',
-    'country' => 'Česká republika',
+    'country_code' => 'CZ',
     'mail_to' => 'info@examle.com',
 ];
 
